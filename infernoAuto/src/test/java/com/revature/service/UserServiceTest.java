@@ -67,6 +67,7 @@ class UserServiceTest {
 
         // Arrange and Act
         new UserService();
+
     }
 
     /**
@@ -99,14 +100,20 @@ class UserServiceTest {
         new UserService(new ArrayList<>());
     }
 
+
     /**
      * Method under test: {@link UserService#createUser(User)}
      */
+
+    UserService userService = new UserService();
     @Test
+
     void testCreateUser() {
         // Arrange, Act and Assert
-        assertTrue(UserService.createUser(new User("Jane", "Doe", "janedoe", "iloveyou")));
-        assertTrue(UserService.createUser(new User("Jane", "Doe", "janedoe", "iloveyou")));
+        assertTrue(userService.createUser(new User("Jane"
+                , "Doe", "janedoe", "iloveyou")));
+        assertTrue(userService.createUser(new User("Jane"
+                , "Doe", "janedoe", "iloveyou")));
     }
 }
 
