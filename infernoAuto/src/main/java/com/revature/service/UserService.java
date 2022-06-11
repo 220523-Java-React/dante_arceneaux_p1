@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import com.revature.model.Role;
 import com.revature.model.User;
 import java.util.*;
 
@@ -13,6 +14,10 @@ public class UserService {
     public UserService(List<User> users){
         this.users = users;
     }
+
+    public static void createGuestUser(String role) {
+    }
+
     public boolean createUser(User user){
         return users.add(user);
     }
@@ -41,5 +46,7 @@ public class UserService {
 
         return false;
     }
+
+   
 
 }

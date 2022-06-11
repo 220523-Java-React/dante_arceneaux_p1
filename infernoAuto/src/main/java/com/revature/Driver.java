@@ -14,11 +14,14 @@ public class Driver {
         Javalin app = Javalin.create().start(8008);
 
         app.get("/", context -> context.result("Welcome to the InfernoAutoAPI"));
-        app.get("/cars", infernoAutoController.getAllCars);
+        app.get("/cars/all",
+                infernoAutoController.getAllCars);
         app.get("/cars/{id}", infernoAutoController.getCarById);
         app.post("/cars", infernoAutoController.createCar);
         app.delete("/cars/{id}", infernoAutoController.deleteCarById);
         app.put("/cars", infernoAutoController.updateCar);
+
+
 
     }
 

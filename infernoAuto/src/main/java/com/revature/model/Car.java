@@ -11,7 +11,6 @@ public class Car extends Vehicle {
     String color;
     double price;
     String description;
-    String image;
 
     int id;
 
@@ -88,14 +87,6 @@ public class Car extends Vehicle {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public int getId() {
         return id;
     }
@@ -115,8 +106,7 @@ public class Car extends Vehicle {
                 ", color ='" + color + '\'' +
                 ", price =" + price +
                 ", description ='" + description + '\'' +
-                ", image ='" + image + '\'' +
-                '}';
+                ", id =" + id;
     }
 
 

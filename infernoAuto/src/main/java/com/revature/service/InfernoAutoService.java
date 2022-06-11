@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import com.revature.model.Car;
+import com.revature.model.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,4 +58,6 @@ public class InfernoAutoService {
 
         return false;
     }
+
+
 }

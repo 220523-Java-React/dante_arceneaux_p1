@@ -1,18 +1,25 @@
 package com.revature.controller;
 
 import com.revature.model.Car;
+import com.revature.model.Role;
 import com.revature.service.InfernoAutoService;
 import io.javalin.http.Handler;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.revature.service.UserService;
 
 public class InfernoAutoController {
+
+
 
     InfernoAutoService infernoAutoService = new InfernoAutoService();
 
     public Handler getAllCars = ctx -> {
-        List<Car> cars = new ArrayList<>(); // create a new list of cars
+        List<Car> cars = new ArrayList<>();// create a new list of cars
+        cars = infernoAutoService.getAllCars();// get all cars from the service
+        ctx.json(cars);// send the list of cars to the client
+
     };
 
     public Handler getCarById = ctx -> {
@@ -38,6 +45,7 @@ public class InfernoAutoController {
         infernoAutoService.updateCar(car); // update the car in the service
         ctx.status(204); // set the status code to 204
     };
+
 
 
 
