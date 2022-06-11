@@ -3,14 +3,12 @@ package com.revature.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class User implements Serializable {
+public class User {
 
-    private int id;
     private String firstName;
     private String lastName;
     private String username;
     private String password;
-    private Role role;
 
 
 
@@ -19,22 +17,16 @@ public class User implements Serializable {
     }
 
 
- public User(Role role, String firstName, String lastName, String username, String password){
+ public User(String firstName, String lastName
+         , String username, String password){
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+
     }
 
     //getter and setter
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFirstName(){
         return firstName;
@@ -68,40 +60,15 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    //equals and hashcode
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && role == user.role;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, username, password, role);
-    }
-
     //toString
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
+                ", password='" + password + '\'' +  '}';
     }
+
 
 }

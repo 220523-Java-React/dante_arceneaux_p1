@@ -14,6 +14,10 @@ public class Driver {
         Javalin app = Javalin.create().start(8008);
 
         app.get("/", context -> context.result("Welcome to the InfernoAutoAPI"));
+
+        app.post("/user", infernoAutoController.createUser);
+        app.get("/user/all",
+                infernoAutoController.getAllUsers);
         app.get("/cars/all",
                 infernoAutoController.getAllCars);
         app.get("/cars/{id}", infernoAutoController.getCarById);

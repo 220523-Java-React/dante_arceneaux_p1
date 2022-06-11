@@ -1,7 +1,6 @@
 package com.revature.service;
 
 import com.revature.model.Car;
-import com.revature.model.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +11,6 @@ public class InfernoAutoService {
 
     public InfernoAutoService(){
         cars = new ArrayList<>();
-    }
-
-    public InfernoAutoService(List<Car> cars){
-        this.cars = cars;
     }
 
     public boolean createCar(Car car){

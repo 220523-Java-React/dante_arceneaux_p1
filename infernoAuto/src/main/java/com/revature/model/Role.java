@@ -1,18 +1,16 @@
 package com.revature.model;
 
 public enum Role {
-    USER, ADMIN, EMPLOYEE, GUEST;
+    CUSTOMER, EMPLOYEE, GUEST;
 
     //get
     public String getRole(int role){
         switch(role){
             case 1:
-                return "USER";
+                return "CUSTOMER";
             case 2:
-                return "ADMIN";
-            case 3:
                 return "EMPLOYEE";
-            case 4:
+            case 3:
                 return "GUEST";
             default:
                 return "";

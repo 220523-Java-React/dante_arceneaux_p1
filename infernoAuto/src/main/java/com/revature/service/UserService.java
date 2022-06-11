@@ -3,21 +3,19 @@ package com.revature.service;
 import com.revature.model.Role;
 import com.revature.model.User;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
 
-    List<User> users;
+    private List<User> users;
     public UserService(){
         users = new ArrayList<>();
-    }
 
+    }
     public UserService(List<User> users){
         this.users = users;
     }
-
-    public static void createGuestUser(String role) {
-    }
-
     public boolean createUser(User user){
         return users.add(user);
     }
@@ -26,27 +24,8 @@ public class UserService {
         return users;
     }
 
-    public User getUserById(int id){
-        for(int i = 0; i < users.size(); i++){
-            if(users.get(i).getId() == id){
-                return users.get(i);
-            }
-        }
 
-        return null;
-    }
 
-    public boolean deleteUserById(int id){
-        for(int i = 0; i < users.size(); i++){
-            if(users.get(i).getId() == id){
-                users.remove(i);
-                return true;
-            }
-        }
 
-        return false;
-    }
-
-   
 
 }
