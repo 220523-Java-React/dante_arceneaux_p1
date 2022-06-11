@@ -1,10 +1,7 @@
 package com.revature.service;
-
-import com.revature.model.Role;
-import com.revature.model.User;
 import java.util.*;
-import java.util.ArrayList;
-import java.util.List;
+import com.revature.model.User;
+
 
 public class UserService {
 
@@ -13,17 +10,18 @@ public class UserService {
         users = new ArrayList<>();
 
     }
+
+    public boolean createUser(User user){
+        return users.add(user); //add the user to the list
+    }
+
     public UserService(List<User> users){
         this.users = users;
-    }
-    public boolean createUser(User user){
-        return users.add(user);
     }
 
     public List<User> getAllUsers(){
         return users;
-    }
-
+    } //
 
 
 

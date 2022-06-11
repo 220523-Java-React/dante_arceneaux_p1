@@ -15,6 +15,7 @@ public class InfernoAutoController {
 
 
     InfernoAutoService infernoAutoService = new InfernoAutoService();
+    UserService userService = new UserService();
 
     public Handler getAllCars = ctx -> {
         List<Car> cars;// create a new list of cars
@@ -35,17 +36,21 @@ public class InfernoAutoController {
         ctx.status(201); // set the status code to 201
     };
 
+   //create user
     public Handler createUser = ctx -> {
-
         User user = ctx.bodyAsClass(User.class); // get the user from the client
-        UserService.createUser(user); // create the user in
-        // the service
+       userService.createUser(user); //
+       // create the
+
+       // user in the
+       // service
         ctx.status(201); // set the status code to 201
     };
 
     public Handler getAllUsers = ctx -> {
         List<User> users;// create a new list of users
-        users = UserService.getAllUsers();// get all users from the service
+        users = userService.getAllUsers();// get all users
+        // from the service
         ctx.json(users);// send the list of users to the client
     };
 

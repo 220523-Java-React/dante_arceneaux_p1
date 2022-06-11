@@ -4,6 +4,7 @@ import com.revature.controller.InfernoAutoController;
 import com.revature.model.Car;
 import com.revature.model.Role;
 import com.revature.model.User;
+import com.revature.service.UserService;
 import io.javalin.Javalin;
 
 public class Driver {

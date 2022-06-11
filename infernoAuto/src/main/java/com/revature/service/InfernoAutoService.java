@@ -1,25 +1,26 @@
 package com.revature.service;
 
 import com.revature.model.Car;
+import com.revature.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InfernoAutoService {
 
-    private List<Car> cars;
+    private List<Car> cars; //list of cars
 
     public InfernoAutoService(){
-        cars = new ArrayList<>();
+        cars = new ArrayList<>(); //create a new list of cars
     }
 
     public boolean createCar(Car car){
-        return cars.add(car);
+        return cars.add(car); //add the car to the list
     }
 
     public List<Car> getAllCars(){
         return cars;
-    }
+    } //get all cars from the list
 
     public Car getCarById(int id){
         for(int i = 0; i < cars.size(); i++){
@@ -53,6 +54,7 @@ public class InfernoAutoService {
 
         return false;
     }
+
 
 
 }
