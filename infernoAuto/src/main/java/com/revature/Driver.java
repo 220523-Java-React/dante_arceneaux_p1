@@ -7,9 +7,14 @@ import com.revature.model.User;
 import com.revature.service.UserService;
 import io.javalin.Javalin;
 
+
 public class Driver {
 
     public static void main(String[] args) {
+
+
+
+
         InfernoAutoController infernoAutoController = new InfernoAutoController();
 
         Javalin app = Javalin.create().start(8008);
