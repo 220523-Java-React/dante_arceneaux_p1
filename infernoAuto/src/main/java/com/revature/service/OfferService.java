@@ -9,6 +9,8 @@ public class OfferService {
 
     List<Offer> offers;
 
+
+
     public OfferService(){
         offers = new ArrayList<>();
     }
@@ -19,6 +21,10 @@ public class OfferService {
 
     public List<Offer> getAllOffers(){
         return offers;
+    }
+
+    public Offer acceptOffer(Offer offer){
+        return offer;
     }
 
     public Offer getOfferById(int id){
@@ -52,8 +58,6 @@ public class OfferService {
 
         return false;
     }
-
-
 
 
 }

@@ -43,7 +43,7 @@ public class Driver {
 
             int id = 1;
             List<ArrayList> ids = Collections.singletonList(readValue.getAllIds());
-            System.out.println(ids);
+
 
             for (ArrayList i : ids) {
                 while (i.contains(id)) {
@@ -56,7 +56,7 @@ public class Driver {
             insertValue.createItem(id, firstName, lastName, username, password);
 
             System.out.println("You have successfully signed up!");
-            System.out.println("your first name is " + firstName + " your first name is " + lastName + " your username is " + username );
+            System.out.println("Welcome " + firstName +" " + lastName + " your username is " + username );
 
         } else if(choice.equals("login")) {
         }
@@ -77,7 +77,13 @@ public class Driver {
         app.post("/cars", infernoAutoController.createCar);
         app.delete("/cars/{id}", infernoAutoController.deleteCarById);
         app.put("/cars", infernoAutoController.updateCar);
-
+        app.post("/offers",
+                infernoAutoController.createOffer);
+        app.get("/offers/all",  infernoAutoController.getAllOffers);
+        app.get("/offers/{id}", infernoAutoController.getOfferById);
+        app.delete("/offers/{id}", infernoAutoController.deleteOfferById);
+        app.put("/offers", infernoAutoController.updateOffer);
+        app.post("/offers/{id}/accept", infernoAutoController.acceptOffer);
 
 
     }

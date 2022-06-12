@@ -2,6 +2,7 @@ package com.revature.controller;
 
 import com.revature.Driver;
 import com.revature.model.Car;
+import com.revature.model.Offer;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.service.InfernoAutoService;
@@ -15,9 +16,10 @@ import com.revature.service.UserService;
 public class InfernoAutoController extends Driver {
 
 
-
     InfernoAutoService infernoAutoService = new InfernoAutoService();
     UserService userService = new UserService();
+
+    OfferService offerService = new OfferService();
 
     public Handler getAllCars = ctx -> {
         List<Car> cars;// create a new list of cars
@@ -38,14 +40,14 @@ public class InfernoAutoController extends Driver {
         ctx.status(201); // set the status code to 201
     };
 
-   //create user
+    //create user
     public Handler createUser = ctx -> {
         User user = ctx.bodyAsClass(User.class); // get the user from the client
-       userService.createUser(user); //
-       // create the
+        userService.createUser(user); //
+        // create the
 
-       // user in the
-       // service
+        // user in the
+        // service
         ctx.status(201); // set the status code to 201
     };
 
@@ -68,7 +70,57 @@ public class InfernoAutoController extends Driver {
         ctx.status(204); // set the status code to 204
     };
 
+    public Handler getAllOffers = ctx -> {
+        List<Offer> offers;// create a new list of cars
+        offers = offerService.getAllOffers();// get all cars
+        // from the service
+        ctx.json(offers);// send the list of cars to the
+        // client
+    };
 
+    public Handler getOfferById = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url
+        Car car = infernoAutoService.getCarById(id);
+    };
 
+    public Handler createOffer = ctx -> {
+        Offer offer = ctx.bodyAsClass(Offer.class); // get
+        // the
+        // car from the client
+        offerService.createOffer(offer); // create the
+        // car in the service
+        ctx.status(201); // set the status code to 201
+    };
+
+    public Handler deleteOfferById = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url
+        infernoAutoService.deleteCarById(id); // delete the car from the service
+        ctx.status(204); // set the status code to 204
+    };
+
+    public Handler updateOffer = ctx -> {
+        Car car = ctx.bodyAsClass(Car.class); // get the car from the client
+        infernoAutoService.updateCar(car); // update the car in the service
+        ctx.status(204); // set the status code to 204
+    };
+
+    public Handler getAllOffersByUser = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url
+        List<Offer> cars;// create a new list of cars
+        cars = offerService.getAllOffers();// get all cars
+        // from the service
+        ctx.json(cars);// send the list of cars to the client
+    };
+
+    public Handler getOfferByIdByUser = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url
+        Offer car = offerService.getOfferById(id);
+    };
+
+    //accept offer
+    public Handler acceptOffer = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url
+        Offer car = offerService.getOfferById(id);
+    };
 
 }

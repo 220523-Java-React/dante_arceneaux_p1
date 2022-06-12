@@ -5,14 +5,15 @@ public class Offer {
     private int offerId;
     private String offerType;
     private String offerDate;
-    private String offerPrice;
+    private int offerPrice;
     private String offerStatus;
 
     Offer (){
     }
 
     public Offer(int offerId, String offerType,
-                 String offerDate, String offerPrice, String offerStatus) {
+                 String offerDate, int offerPrice,
+                 String offerStatus) {
         this.offerId = offerId;
         this.offerType = offerType;
         this.offerDate = offerDate;
@@ -44,11 +45,11 @@ public class Offer {
         this.offerDate = offerDate;
     }
 
-    public String getOfferPrice() {
+    public int getOfferPrice() {
         return offerPrice;
     }
 
-    public void setOfferPrice(String offerPrice) {
+    public void setOfferPrice(int offerPrice) {
         this.offerPrice = offerPrice;
     }
 
