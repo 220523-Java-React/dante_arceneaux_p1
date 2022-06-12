@@ -3,7 +3,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 
-public class ReadValue extends SqlConnection {
+public class ReadValue  {
     public static void readValue() throws SQLException {
         Statement statement = null;
         Connection connection = DriverManager.getConnection(
