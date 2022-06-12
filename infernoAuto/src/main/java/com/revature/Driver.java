@@ -2,14 +2,19 @@ package com.revature;
 
 import com.revature.controller.InfernoAutoController;
 import com.revature.database.InsertValue;
+import com.revature.database.ReadValue;
 import com.revature.model.Car;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.service.UserService;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import io.javalin.Javalin;
 
 import java.sql.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -21,23 +26,40 @@ public class Driver {
         System.out.println("Welcome to the Inferno Auto!");
         System.out.println("sign up or login to continue?");
 
-        if (sc.nextLine().equals("sign up")) {
-            System.out.println("Please enter your id");
-            int id = sc.nextInt();
-            System.out.println("Please enter your first name");
-            String firstName = sc.next();
-            System.out.println("Please enter your last name");
-            String lastName = sc.next();
-            System.out.println("Please enter your username");
-            String username = sc.next();
-            System.out.println("Please enter your password");
-            String password = sc.next();
-            InsertValue insertValue = new InsertValue();
+        ReadValue readValue = new ReadValue();
 
-            insertValue.createItem(id, firstName, lastName, username, password);
+                 System.out.println("Please enter your id: ");
+                int id = sc.nextInt();
+                List<ArrayList> ids = Collections.singletonList(readValue.getAllIds());
+        System.out.println(ids);
+
+    for(ArrayList i : ids){
+        if(i.contains(id)){
+            System.out.println("Your id is already in the" +
+                    " database.  Your new id will be " + (id + 1));
         }
+        while(i.contains(id)){
+            id++;
+        }
+    }
 
 
+                System.out.println("Please enter your first name");
+                String firstName = sc.next();
+                System.out.println("Please enter your last name");
+                String lastName = sc.next();
+                System.out.println("Please enter your username");
+                String username = sc.next();
+                System.out.println("Please enter your password");
+                String password = sc.next();
+
+                InsertValue insertValue = new InsertValue();
+
+        System.out.println(id);
+
+                insertValue.createItem(id, firstName, lastName, username, password);
+
+                System.out.println("You have successfully signed up!");
 
 
         InfernoAutoController infernoAutoController = new InfernoAutoController();
@@ -59,9 +81,4 @@ public class Driver {
 
 
     }
-
-
-
-
-
 }
