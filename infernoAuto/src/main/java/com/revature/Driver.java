@@ -28,21 +28,6 @@ public class Driver {
 
         ReadValue readValue = new ReadValue();
 
-                 System.out.println("Please enter your id: ");
-                int id = sc.nextInt();
-                List<ArrayList> ids = Collections.singletonList(readValue.getAllIds());
-        System.out.println(ids);
-
-    for(ArrayList i : ids){
-        if(i.contains(id)){
-            System.out.println("Your id is already in the" +
-                    " database.  Your new id will be " + (id + 1));
-        }
-        while(i.contains(id)){
-            id++;
-        }
-    }
-
 
                 System.out.println("Please enter your first name");
                 String firstName = sc.next();
@@ -53,7 +38,25 @@ public class Driver {
                 System.out.println("Please enter your password");
                 String password = sc.next();
 
-                InsertValue insertValue = new InsertValue();
+
+        int id = 1;
+        List<ArrayList> ids = Collections.singletonList(readValue.getAllIds());
+        System.out.println(ids);
+
+        for(ArrayList i : ids){
+            if(i.contains(id)){
+                System.out.println("Your id is already in the" +
+                        " database.  Your new id will be " + (id + 1));
+            }
+            while(i.contains(id)){
+                id++;
+            }
+        }
+
+
+        InsertValue insertValue = new InsertValue();
+
+
 
         System.out.println(id);
 
