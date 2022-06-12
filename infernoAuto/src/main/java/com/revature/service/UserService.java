@@ -5,9 +5,9 @@ import com.revature.model.User;
 
 public class UserService {
 
-    private List<User> users;
+    private List<User> users; //list of users
     public UserService(){
-        users = new ArrayList<>();
+        users = new ArrayList<>(); //create a new list of users
 
     }
 

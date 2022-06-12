@@ -2,6 +2,8 @@ package com.revature.model;
 
 import com.revature.repository.DAO;
 
+import java.util.Objects;
+
 public class Car extends Vehicle {
 
     String make;
@@ -96,18 +98,6 @@ public class Car extends Vehicle {
     }
 
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "make ='" + make + '\'' +
-                ", model ='" + model + '\'' +
-                ", year =" + year +
-                ", mileage =" + mileage +
-                ", color ='" + color + '\'' +
-                ", price =" + price +
-                ", description ='" + description + '\'' +
-                ", id =" + id;
-    }
 
 
 

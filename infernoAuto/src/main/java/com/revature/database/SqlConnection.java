@@ -3,7 +3,7 @@ package com.revature.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class PostgresSQLJDBC {
+public class SqlConnection {
     public static void main(String[] args) {
 
         Connection connection = null;
@@ -26,5 +26,10 @@ public class PostgresSQLJDBC {
                 }
             }
         }
+
+
+
+
+
     }
 }
