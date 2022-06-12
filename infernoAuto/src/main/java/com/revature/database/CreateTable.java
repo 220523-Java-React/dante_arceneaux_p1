@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class CreateTable extends SqlConnection {
 
-    public static void main(String[] args) throws SQLException {
+    public static void createTable(String[] args) throws SQLException {
 
         Statement statement = null;
         Connection connection = DriverManager.getConnection(
