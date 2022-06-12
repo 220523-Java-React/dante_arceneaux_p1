@@ -44,10 +44,6 @@ public class Driver {
         System.out.println(ids);
 
         for(ArrayList i : ids){
-            if(i.contains(id)){
-                System.out.println("Your id is already in the" +
-                        " database.  Your new id will be " + (id + 1));
-            }
             while(i.contains(id)){
                 id++;
             }
@@ -57,8 +53,6 @@ public class Driver {
         InsertValue insertValue = new InsertValue();
 
 
-
-        System.out.println(id);
 
                 insertValue.createItem(id, firstName, lastName, username, password);
 
