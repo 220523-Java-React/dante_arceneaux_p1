@@ -1,7 +1,7 @@
 package com.revature.database;
 import java.sql.*;
 
-public class InsertValue {
+public class InsertValue extends SqlConnection {
     public static void createItem(int id, String firstName,
                            String lastName , String username, String password) throws SQLException {
 

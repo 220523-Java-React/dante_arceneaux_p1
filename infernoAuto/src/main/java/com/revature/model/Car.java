@@ -1,9 +1,5 @@
 package com.revature.model;
 
-import com.revature.repository.DAO;
-
-import java.util.Objects;
-
 public class Car extends Vehicle {
 
     String make;

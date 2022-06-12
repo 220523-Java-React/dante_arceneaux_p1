@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import java.sql.*;
 
-public class CreateTable {
+public class CreateTable extends SqlConnection {
 
     public static void main(String[] args) throws SQLException {
 

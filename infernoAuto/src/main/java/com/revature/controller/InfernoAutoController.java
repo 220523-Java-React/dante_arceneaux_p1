@@ -1,16 +1,18 @@
 package com.revature.controller;
 
+import com.revature.Driver;
 import com.revature.model.Car;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.service.InfernoAutoService;
+import com.revature.service.OfferService;
 import io.javalin.http.Handler;
 
 import java.util.ArrayList;
 import java.util.List;
 import com.revature.service.UserService;
 
-public class InfernoAutoController {
+public class InfernoAutoController extends Driver {
 
 
 
