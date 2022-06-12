@@ -25,38 +25,41 @@ public class Driver {
 
         System.out.println("Welcome to the Inferno Auto!");
         System.out.println("sign up or login to continue?");
+        String choice = sc.nextLine();
 
-        ReadValue readValue = new ReadValue();
-
-
-                System.out.println("Please enter your first name");
-                String firstName = sc.next();
-                System.out.println("Please enter your last name");
-                String lastName = sc.next();
-                System.out.println("Please enter your username");
-                String username = sc.next();
-                System.out.println("Please enter your password");
-                String password = sc.next();
+        if(choice.equals("sign up")) {
+            ReadValue readValue = new ReadValue();
 
 
-        int id = 1;
-        List<ArrayList> ids = Collections.singletonList(readValue.getAllIds());
-        System.out.println(ids);
+            System.out.println("Please enter your first name");
+            String firstName = sc.next();
+            System.out.println("Please enter your last name");
+            String lastName = sc.next();
+            System.out.println("Please enter your username");
+            String username = sc.next();
+            System.out.println("Please enter your password");
+            String password = sc.next();
 
-        for(ArrayList i : ids){
-            while(i.contains(id)){
-                id++;
+
+            int id = 1;
+            List<ArrayList> ids = Collections.singletonList(readValue.getAllIds());
+            System.out.println(ids);
+
+            for (ArrayList i : ids) {
+                while (i.contains(id)) {
+                    id++;
+                }
             }
+
+            InsertValue insertValue = new InsertValue();
+
+            insertValue.createItem(id, firstName, lastName, username, password);
+
+            System.out.println("You have successfully signed up!");
+            System.out.println("your first name is " + firstName + " your first name is " + lastName + " your username is " + username );
+
+        } else if(choice.equals("login")) {
         }
-
-
-        InsertValue insertValue = new InsertValue();
-
-
-
-                insertValue.createItem(id, firstName, lastName, username, password);
-
-                System.out.println("You have successfully signed up!");
 
 
         InfernoAutoController infernoAutoController = new InfernoAutoController();
