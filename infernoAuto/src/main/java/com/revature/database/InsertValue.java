@@ -6,10 +6,7 @@ public class InsertValue  {
                            String lastName , String username, String password) throws SQLException {
 
         Statement statement = null;
-        Connection connection = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432" +
-                        "/postgres", "postgres",
-                "Ch3ss75!9");
+        Connection connection = Database.getConnection();
 
         try {
             String query = "INSERT INTO userdata (id, firstname, lastname, username, password) VALUES (?, ?, ?, ?, ?)";

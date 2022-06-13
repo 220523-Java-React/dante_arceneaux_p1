@@ -3,8 +3,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import java.sql.*;
+
 
 public class CreateTable {
 
@@ -16,8 +16,12 @@ public class CreateTable {
                         "/postgres", "postgres",
                 "Ch3ss75!9");
        try {
-           String query = "CREATE TABLE userdata (id " +
-                   "INTEGER PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), username VARCHAR(255), password VARCHAR(255))";
+           String query = "CREATE TABLE offerdata (id " +
+                   "INTEGER PRIMARY KEY, offerId " +
+                   "VARCHAR(255), offerPrice VARCHAR(255)" +
+                   ", offerType VARCHAR(255), offerStatus" +
+                   " " +
+                   "VARCHAR(255))";
            statement = connection.createStatement();
            statement.executeUpdate(query);
            System.out.println("Table created successfully");

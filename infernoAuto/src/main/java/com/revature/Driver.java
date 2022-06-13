@@ -1,6 +1,7 @@
 package com.revature;
 
 import com.revature.controller.InfernoAutoController;
+import com.revature.database.Database;
 import com.revature.database.InsertValue;
 import com.revature.database.ReadValue;
 import com.revature.model.Car;
@@ -21,10 +22,45 @@ import java.util.Scanner;
 public class Driver {
 
     public static void main(String[] args) throws SQLException {
-        Scanner sc = new Scanner(System.in);
 
-        System.out.println("Welcome to the Inferno Auto!");
-        System.out.println("sign up or login to continue?");
+
+        InfernoAutoController infernoAutoController = new InfernoAutoController();
+
+        Javalin app = Javalin.create().start(8008);
+
+        app.get("/", context -> context.result("Welcome to the InfernoAutoAPI"));
+
+        app.post("/user", infernoAutoController.createUser);
+        app.get("/user/all",
+                infernoAutoController.getAllUsers);
+        app.get("/cars/all",
+                infernoAutoController.getAllCars);
+        app.get("/cars/{id}", infernoAutoController.getCarById);
+        app.post("/cars", infernoAutoController.createCar);
+        app.delete("/cars/{id}", infernoAutoController.deleteCarById);
+        app.put("/cars", infernoAutoController.updateCar);
+        app.post("/offers",
+                infernoAutoController.createOffer);
+        app.get("/offers/all",  infernoAutoController.getAllOffers);
+        app.get("/offers/{id}", infernoAutoController.getOfferById);
+        app.delete("/offers/{id}", infernoAutoController.deleteOfferById);
+        app.put("/offers", infernoAutoController.updateOffer);
+        app.post("/offers/{id}/accept", infernoAutoController.acceptOffer);
+
+
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println(
+                "====================================");
+
+        System.out.println("   Welcome to the Inferno " +
+                "Auto!");
+        System.out.println(
+                "====================================");
+        System.out.println("Type: 'sign up' or 'login' to" +
+                " " +
+                "continue. Type: 'guest' if you choose to " +
+                "enter as a guest.");
         String choice = sc.nextLine();
 
         if(choice.equals("sign up")) {
@@ -61,30 +97,11 @@ public class Driver {
         } else if(choice.equals("login")) {
         }
 
-
-        InfernoAutoController infernoAutoController = new InfernoAutoController();
-
-        Javalin app = Javalin.create().start(8008);
-
-        app.get("/", context -> context.result("Welcome to the InfernoAutoAPI"));
-
-        app.post("/user", infernoAutoController.createUser);
-        app.get("/user/all",
-                infernoAutoController.getAllUsers);
-        app.get("/cars/all",
-                infernoAutoController.getAllCars);
-        app.get("/cars/{id}", infernoAutoController.getCarById);
-        app.post("/cars", infernoAutoController.createCar);
-        app.delete("/cars/{id}", infernoAutoController.deleteCarById);
-        app.put("/cars", infernoAutoController.updateCar);
-        app.post("/offers",
-                infernoAutoController.createOffer);
-        app.get("/offers/all",  infernoAutoController.getAllOffers);
-        app.get("/offers/{id}", infernoAutoController.getOfferById);
-        app.delete("/offers/{id}", infernoAutoController.deleteOfferById);
-        app.put("/offers", infernoAutoController.updateOffer);
-        app.post("/offers/{id}/accept", infernoAutoController.acceptOffer);
-
-
+Connection con = Database.getConnection();
+        if(con != null) {
+            System.out.println("Connected to the database");
+        } else {
+            System.out.println("Failed to make connection");
+        }
     }
 }

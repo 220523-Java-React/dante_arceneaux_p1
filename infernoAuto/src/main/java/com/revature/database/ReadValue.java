@@ -55,10 +55,7 @@ public class ReadValue  {
         ArrayList<Integer> ids = new ArrayList<>();
         try {
             Statement statement = null;
-            Connection connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432" +
-                            "/postgres", "postgres",
-                    "Ch3ss75!9");
+            Connection connection = Database.getConnection();
             String query = "SELECT id FROM userdata";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
