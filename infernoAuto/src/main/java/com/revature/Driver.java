@@ -4,11 +4,6 @@ import com.revature.controller.InfernoAutoController;
 import com.revature.database.Database;
 import com.revature.database.InsertValue;
 import com.revature.database.ReadValue;
-import com.revature.model.Car;
-import com.revature.model.Role;
-import com.revature.model.User;
-import com.revature.service.UserService;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import io.javalin.Javalin;
 
 import java.sql.*;

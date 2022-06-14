@@ -3,21 +3,19 @@ package com.revature.controller;
 import com.revature.Driver;
 import com.revature.model.Car;
 import com.revature.model.Offer;
-import com.revature.model.Role;
 import com.revature.model.User;
+import com.revature.service.UserDaoImplementation;
 import com.revature.service.InfernoAutoService;
 import com.revature.service.OfferService;
 import io.javalin.http.Handler;
 
-import java.util.ArrayList;
 import java.util.List;
-import com.revature.service.UserService;
 
 public class InfernoAutoController extends Driver {
 
 
     InfernoAutoService infernoAutoService = new InfernoAutoService();
-    UserService userService = new UserService();
+    UserDaoImplementation userDao = new UserDaoImplementation();
 
     OfferService offerService = new OfferService();
 
@@ -43,7 +41,7 @@ public class InfernoAutoController extends Driver {
     //create user
     public Handler createUser = ctx -> {
         User user = ctx.bodyAsClass(User.class); // get the user from the client
-        userService.createUser(user); //
+        userDao.createUser(user); //
         // create the
 
         // user in the
@@ -53,7 +51,7 @@ public class InfernoAutoController extends Driver {
 
     public Handler getAllUsers = ctx -> {
         List<User> users;// create a new list of users
-        users = userService.getAllUsers();// get all users
+        users = userDao.getAll();// get all users
         // from the service
         ctx.json(users);// send the list of users to the client
     };
