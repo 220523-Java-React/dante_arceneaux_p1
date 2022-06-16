@@ -69,7 +69,7 @@ public class Car extends Vehicle {
         this.color = color;
     }
 
-    public double getPrice() {
+    public double getPrice(byte price) {
         return price;
     }
 
@@ -94,7 +94,10 @@ public class Car extends Vehicle {
     }
 
 
-
+@Override
+    void drive() {
+        System.out.println("Driving");
+    };
 
 
 }

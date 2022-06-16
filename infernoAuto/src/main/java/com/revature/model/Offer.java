@@ -1,5 +1,9 @@
 package com.revature.model;
 
+import lombok.ToString;
+
+
+
 public class Offer {
 
     private int offerId;

@@ -1,10 +1,12 @@
 package com.revature;
 
 import com.revature.controller.InfernoAutoController;
+import com.revature.controller.UserController;
 import com.revature.database.Database;
 import com.revature.database.InsertValue;
 import com.revature.database.ReadValue;
 import io.javalin.Javalin;
+import org.apache.logging.log4j.core.util.ArrayUtils;
 
 import java.sql.*;
 
@@ -20,14 +22,14 @@ public class Driver {
 
 
         InfernoAutoController infernoAutoController = new InfernoAutoController();
+        UserController userController = new UserController();
 
         Javalin app = Javalin.create().start(8008);
 
         app.get("/", context -> context.result("Welcome to the InfernoAutoAPI"));
 
-        app.post("/user", infernoAutoController.createUser);
-        app.get("/user/all",
-                infernoAutoController.getAllUsers);
+        app.post("/user", userController.createUser);
+        app.get("/user/all", userController.getAllUsers);
         app.get("/cars/all",
                 infernoAutoController.getAllCars);
         app.get("/cars/{id}", infernoAutoController.getCarById);
@@ -98,5 +100,6 @@ Connection con = Database.getConnection();
         } else {
             System.out.println("Failed to make connection");
         }
+        }
     }
-}
+

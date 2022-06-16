@@ -5,22 +5,16 @@ import java.util.List;
 
 public interface Dao<T> {
 
-    T get(int id) throws SQLException;
+    Object createUser(Object o);
 
-    List<T> getAll() throws SQLException;
+    T create(T t);
 
-    int save (T t) throws SQLException;
+    List<T> getAll();
 
-    int insert (T t) throws SQLException;
+    T getById(int id);
 
-    int update (T t) throws SQLException;
+    T update(T t);
 
-    int delete (T t) throws SQLException;
-
-    int delete (int id) throws SQLException;
-
-    int update (int id, T t) throws SQLException;
-
-
+    boolean deleteById(int id);
 
 }

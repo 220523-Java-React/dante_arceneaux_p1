@@ -4,7 +4,7 @@ import com.revature.Driver;
 import com.revature.model.Car;
 import com.revature.model.Offer;
 import com.revature.model.User;
-import com.revature.service.UserDaoImplementation;
+import com.revature.repository.UserRepository;
 import com.revature.service.InfernoAutoService;
 import com.revature.service.OfferService;
 import io.javalin.http.Handler;
@@ -15,7 +15,7 @@ public class InfernoAutoController extends Driver {
 
 
     InfernoAutoService infernoAutoService = new InfernoAutoService();
-    UserDaoImplementation userDao = new UserDaoImplementation();
+    UserRepository userDao = new UserRepository();
 
     OfferService offerService = new OfferService();
 
@@ -39,22 +39,8 @@ public class InfernoAutoController extends Driver {
     };
 
     //create user
-    public Handler createUser = ctx -> {
-        User user = ctx.bodyAsClass(User.class); // get the user from the client
-        userDao.createUser(user); //
-        // create the
 
-        // user in the
-        // service
-        ctx.status(201); // set the status code to 201
-    };
 
-    public Handler getAllUsers = ctx -> {
-        List<User> users;// create a new list of users
-        users = userDao.getAll();// get all users
-        // from the service
-        ctx.json(users);// send the list of users to the client
-    };
 
     public Handler deleteCarById = ctx -> {
         int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url

@@ -36,7 +36,9 @@ public class ReadValue  {
                         "/postgres", "postgres",
                 "Ch3ss75!9");
         try {
-            String query = "SELECT * FROM userdata WHERE id = ?";
+            String query = "SELECT * FROM userdata WHERE " +
+                    "id " +
+                    "= ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

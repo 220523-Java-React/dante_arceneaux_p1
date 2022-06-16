@@ -10,8 +10,7 @@ public class User {
     private String username;
     private String password;
 
-
-
+//    private Role role = Role.USER;
 
     public User(){
     }
@@ -25,8 +24,6 @@ public class User {
         this.password = password;
 
     }
-
-    //getter and setter
 
     public String getFirstName(){
         return firstName;
@@ -60,17 +57,30 @@ public class User {
         this.password = password;
     }
 
-    //toString
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, username, password);
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "firstName=" + firstName +
-                ", lastName=" + lastName + '\'' +
-                ", username=" + username + '\'' +
-                ", password=" + password +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        User user = (User) o;
+        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(username, user.username) && Objects.equals(password, user.password);
+    }
 
-
+    public void setId(int id) {
+    }
 }

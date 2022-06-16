@@ -5,7 +5,10 @@ import com.revature.model.Offer;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class OfferService {
+
+
 
     List<Offer> offers;
 
