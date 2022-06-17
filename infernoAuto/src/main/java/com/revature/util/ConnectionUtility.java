@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionUtility {
 
-
+    private static Connection instance; //create a static instance of the connection
     private final static String url = "jdbc:postgresql://localhost:5432/postgres";
     private final static String user = "postgres";
     private final static String password = "Ch3ss75!9";
@@ -18,15 +18,17 @@ public class ConnectionUtility {
 
      We will bring in a Postgres driver that will satisfy the implementation
      */
-    public static Connection getConnection(){
-        try{
-//            Class.forName("org.postgresql.Driver");    <- only add if you can't solve the No Suitable Driver Found exception
-            Connection connection = DriverManager.getConnection(url, user, password);
-            return connection;
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
+    public static Connection getConnection() throws SQLException{
 
-        return null;
+        if(instance == null || instance.isClosed()){ // we have not yet created a connection
+
+//            Class.forName("org.postgresql.Driver");
+            instance = DriverManager.getConnection(url, user, password);
+        }
+        return instance;
+    }
+
+    private ConnectionUtility(){
+
     }
 }

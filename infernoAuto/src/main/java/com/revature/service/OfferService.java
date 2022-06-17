@@ -62,5 +62,4 @@ public class OfferService {
         return false;
     }
 
-
 }
