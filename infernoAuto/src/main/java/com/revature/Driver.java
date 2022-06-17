@@ -1,6 +1,7 @@
 package com.revature;
 
 import com.revature.controller.InfernoAutoController;
+import com.revature.controller.OfferController;
 import com.revature.controller.UserController;
 import com.revature.database.Database;
 import com.revature.database.InsertValue;
@@ -23,6 +24,7 @@ public class Driver {
 
         InfernoAutoController infernoAutoController = new InfernoAutoController();
         UserController userController = new UserController();
+        OfferController offerController = new OfferController();
 
         Javalin app = Javalin.create().start(8008);
 
@@ -37,12 +39,16 @@ public class Driver {
         app.delete("/cars/{id}", infernoAutoController.deleteCarById);
         app.put("/cars", infernoAutoController.updateCar);
         app.post("/offers",
-                infernoAutoController.createOffer);
-        app.get("/offers/all",  infernoAutoController.getAllOffers);
-        app.get("/offers/{id}", infernoAutoController.getOfferById);
-        app.delete("/offers/{id}", infernoAutoController.deleteOfferById);
-        app.put("/offers", infernoAutoController.updateOffer);
-        app.post("/offers/{id}/accept", infernoAutoController.acceptOffer);
+                offerController.createOffer);
+        app.get("/offers/all",
+                offerController.getAllOffers);
+        app.get("/offers/{id}",
+                offerController.getOfferById);
+        app.delete("/offers/{id}",
+                offerController.deleteOfferById);
+        app.put("/offers", offerController.updateOffer);
+        app.post("/offers/{id}/accept",
+                offerController.acceptOffer);
 
 
 
