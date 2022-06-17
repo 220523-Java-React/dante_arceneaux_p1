@@ -1,4 +1,39 @@
 package com.revature.repository;
 
-public class CarRepository {
+import com.revature.model.Car;
+
+import java.util.List;
+
+public class CarRepository implements Dao<Car> {
+
+    @Override
+    public Object createUser(Object o) {
+        return null;
+    }
+
+    @Override
+    public Car create(Car car) {
+        return null;
+    }
+
+    @Override
+    public List<Car> getAll() {
+        return null;
+    }
+
+    @Override
+    public Car getById(int id) {
+        return null;
+    }
+
+    @Override
+    public Car update(Car car) {
+        return null;
+    }
+
+    @Override
+    public boolean deleteById(int id) {
+        return false;
+    }
 }
+

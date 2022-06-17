@@ -9,13 +9,12 @@ public class InsertValue  {
         Connection connection = Database.getConnection();
 
         try {
-            String query = "INSERT INTO userdata (id, firstname, lastname, username, password) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO userdata (firstname, lastname, username, password) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
-            preparedStatement.setString(2, firstName);
-            preparedStatement.setString(3, lastName);
-            preparedStatement.setString(4, username);
-            preparedStatement.setString(5, password);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, username);
+            preparedStatement.setString(4, password);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

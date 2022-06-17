@@ -6,7 +6,7 @@ import lombok.ToString;
 
 public class Offer {
 
-    private int offerId;
+    private int id;
     private String offerType;
     private String offerDate;
     private int offerPrice;
@@ -18,7 +18,7 @@ public class Offer {
     public Offer(int offerId, String offerType,
                  String offerDate, int offerPrice,
                  String offerStatus) {
-        this.offerId = offerId;
+        this.id = id;
         this.offerType = offerType;
         this.offerDate = offerDate;
         this.offerPrice = offerPrice;
@@ -26,11 +26,11 @@ public class Offer {
     }
 
     public int getOfferId() {
-        return offerId;
+        return id;
     }
 
     public void setOfferId(int offerId) {
-        this.offerId = offerId;
+        this.id = offerId;
     }
 
     public String getOfferType() {
@@ -69,6 +69,14 @@ public class Offer {
 
     @Override
     public String toString() {
-        return "Offer [offer=" + offerId + ", offerType=" + offerType + ", offerDate=" + offerDate + ", offerPrice=" + offerPrice + ", offerStatus=" + offerStatus + "]";
+        return "Offer [offer=" + id + ", offerType=" + offerType + ", offerDate=" + offerDate + ", offerPrice=" + offerPrice + ", offerStatus=" + offerStatus + "]";
+    }
+
+    public boolean add(Offer offer) {
+        return true;
+    }
+
+    public int getId() {
+        return id;
     }
 }
