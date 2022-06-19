@@ -8,6 +8,7 @@ import com.revature.repository.CarRepository;
 import com.revature.repository.UserRepository;
 import com.revature.service.InfernoAutoService;
 import com.revature.service.OfferService;
+import io.javalin.core.security.RouteRole;
 import io.javalin.http.Handler;
 
 import java.util.List;

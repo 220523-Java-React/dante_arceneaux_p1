@@ -1,5 +1,7 @@
 package com.revature.model;
 
+import io.javalin.core.security.RouteRole;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -9,16 +11,29 @@ public class User {
     private String lastName;
     private String username;
     private String password;
+    private int id;
+
+    private Role role;
 
 
-    public User(){
+    public User() {
     }
 
-    public String getFirstName(){
+    //constructor for user
+    public User(String firstName, String lastName, String username, String password, Role role, int id) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.id = id;
+    }
+
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName){
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -46,11 +61,26 @@ public class User {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
-    @Override
+    //hashcode
     public int hashCode() {
-        return Objects.hash(firstName, lastName, username, password);
+        return Objects.hash(firstName, lastName, username, password, role, id);
     }
 
     @Override
@@ -60,18 +90,25 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", id=" + id +
+                ", role=" + role +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        User user = (User) o;
-        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(username, user.username) && Objects.equals(password, user.password);
-    }
+        if (!(o instanceof User)) return false;
 
-    public void setId(int id) {
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        return role == user.role;
     }
 }
+
+

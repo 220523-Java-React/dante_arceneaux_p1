@@ -1,5 +1,6 @@
 package com.revature.repository;
 
+import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
 
@@ -10,7 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class UserRepository implements Dao<User> {
+
 
     @Override
     public Object createObject(User user) {
@@ -18,11 +21,15 @@ public class UserRepository implements Dao<User> {
     }
 
     @Override
+
+
     public User create(User user) {
         // we are receiving a full user object
         // we need a query to insert that record
         //                                                                                1,2,3,4
-        String sql = "insert into users(first_name, last_name, username, password) values(?,?,?,?)";
+        String sql = "insert into users(first_name, last_name, username, password) values(?,?,?,?,?)";
+
+
 
         try {
 
@@ -32,6 +39,7 @@ public class UserRepository implements Dao<User> {
             stmt.setString(2, user.getLastName());
             stmt.setString(3, user.getUsername());
             stmt.setString(4, user.getPassword());
+            stmt.setString(5, String.valueOf(user.getRole()));
 
 
             int success = stmt.executeUpdate();
@@ -39,9 +47,9 @@ public class UserRepository implements Dao<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return null;
     }
-
     @Override
     public List<User> getAll() {
         // Empty lists of users, will add any new users from the result set
@@ -62,6 +70,7 @@ public class UserRepository implements Dao<User> {
                 user.setLastName(results.getString("last_name"));
                 user.setUsername(results.getString("username"));
                 user.setPassword(results.getString("password"));
+
 
                 users.add(user);
             }

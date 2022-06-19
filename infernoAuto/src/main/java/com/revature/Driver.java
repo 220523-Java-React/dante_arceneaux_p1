@@ -6,20 +6,29 @@ import com.revature.controller.UserController;
 import com.revature.database.Database;
 import com.revature.database.InsertValue;
 import com.revature.database.ReadValue;
+import com.revature.model.Employee;
+import com.revature.model.Role;
 import io.javalin.Javalin;
 import org.apache.logging.log4j.core.util.ArrayUtils;
-
+import io.javalin.core.security.RouteRole;
+import io.javalin.http.Context;
+import io.javalin.http.Handler;
+import static io.javalin.apibuilder.ApiBuilder.*;
 import java.sql.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import io.javalin.core.security.*;
 
 
 public class Driver {
 
     public static void main(String[] args) throws SQLException {
+
+
+
+
 
 
         InfernoAutoController infernoAutoController = new InfernoAutoController();
@@ -28,20 +37,23 @@ public class Driver {
 
         Javalin app = Javalin.create().start(8008);
 
-        app.get("/", context -> context.result("Welcome to the InfernoAutoAPI"));
+        app.routes(() -> {
+            path("users", () -> {
+                get("/all", userController.getAllUsers);
+                post(userController.createUser);
+            });
+            path("cars", () -> {
+                get("/all",  infernoAutoController.getAllCars);
+                post(infernoAutoController.createCar);
+                delete(infernoAutoController.deleteCarById);
+                put(infernoAutoController.updateCar);
+            });
+            path("offers", () -> {
+                post( offerController.createOffer);
+                get("/offers/all", offerController.getAllOffers);
+            });
+        });
 
-        app.post("/user", userController.createUser);
-        app.get("/user/all", userController.getAllUsers);
-        app.get("/cars/all",
-                infernoAutoController.getAllCars);
-        app.get("/cars/{id}", infernoAutoController.getCarById);
-        app.post("/cars", infernoAutoController.createCar);
-        app.delete("/cars/{id}", infernoAutoController.deleteCarById);
-        app.put("/cars", infernoAutoController.updateCar);
-        app.post("/offers",
-                offerController.createOffer);
-        app.get("/offers/all",
-                offerController.getAllOffers);
 
 
 
@@ -59,7 +71,7 @@ public class Driver {
                 "enter as a guest.");
         String choice = sc.nextLine();
 
-        if(choice.equals("sign up")) {
+        if (choice.equals("sign up")) {
             ReadValue readValue = new ReadValue();
 
 
@@ -88,17 +100,20 @@ public class Driver {
             insertValue.createItem(id, firstName, lastName, username, password);
 
             System.out.println("You have successfully signed up!");
-            System.out.println("Welcome " + firstName +" " + lastName + " your username is " + username );
+            System.out.println("Welcome " + firstName + " " + lastName + " your username is " + username);
 
-        } else if(choice.equals("login")) {
+        } else if (choice.equals("login")) {
         }
 
-Connection con = Database.getConnection();
-        if(con != null) {
+        Connection con = Database.getConnection();
+        if (con != null) {
             System.out.println("Connected to the database");
         } else {
             System.out.println("Failed to make connection");
         }
-        }
+
+        System.out.println("====================================");
+
+    }
     }
 

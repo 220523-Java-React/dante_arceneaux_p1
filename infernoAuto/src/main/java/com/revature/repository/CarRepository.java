@@ -1,6 +1,7 @@
 package com.revature.repository;
 
 import com.revature.model.Car;
+import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
 
 import java.sql.Connection;
@@ -18,29 +19,31 @@ public class CarRepository implements Dao<Car> {
         return null;
     }
 
-
+User user = new User();
 
     @Override
     public Car create(Car car) {
 
-        String sql = "INSERT INTO cars (make, model, year, color, price, description) VALUES (?, ?, ?, ?, ?, ?)";
-        try {
-            Connection conn = ConnectionUtility.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, car.getMake());
-            ps.setString(2, car.getModel());
-            ps.setInt(3, car.getYear());
-            ps.setString(4, car.getColor());
-            ps.setDouble(5, car.getPrice());
-            ps.setString(6, car.getDescription());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
 
-        }
+
+        String sql = "INSERT INTO cars (make, model, year, color, price, description) VALUES (?, ?, ?, ?, ?, ?)";
+
+            try {
+                Connection conn = ConnectionUtility.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, car.getMake());
+                ps.setString(2, car.getModel());
+                ps.setInt(3, car.getYear());
+                ps.setString(4, car.getColor());
+                ps.setDouble(5, car.getPrice());
+                ps.setString(6, car.getDescription());
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
 return null;
     }
-
     @Override
     public List<Car> getAll() {
 
