@@ -1,9 +1,8 @@
 package com.revature.model;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class Employee {
 
     private String firstName;
     private String lastName;
@@ -11,14 +10,16 @@ public class User {
     private String password;
 
 
-    public User(){
+    public Employee() {
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
+
         return firstName;
     }
 
-    public void setFirstName(String firstName){
+    public void setFirstName(String firstName) {
+
         this.firstName = firstName;
     }
 
@@ -27,25 +28,29 @@ public class User {
     }
 
     public void setLastName(String lastName) {
+
         this.lastName = lastName;
     }
 
     public String getUsername() {
+
         return username;
     }
 
     public void setUsername(String username) {
+
         this.username = username;
     }
 
     public String getPassword() {
+
         return password;
     }
 
     public void setPassword(String password) {
+
         this.password = password;
     }
-
 
 
     @Override
@@ -66,10 +71,9 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        User user = (User) o;
-        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(username, user.username) && Objects.equals(password, user.password);
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(username, employee.username) && Objects.equals(password, employee.password);
     }
 
     public void setId(int id) {

@@ -17,8 +17,13 @@ public class OfferRepository implements Dao<Offer> {
         this.offers = offer;
     }
 
+    @Override
+    public Object createObject(Offer offer) {
+        return null;
+    }
 
-    public Offer createUser(Offer offer) {
+    @Override
+    public Offer create(Offer offer) {
         if(offers.add(offer)){
             return offer;
         }
@@ -27,15 +32,6 @@ public class OfferRepository implements Dao<Offer> {
         }
     }
 
-    @Override
-    public Object createUser(Object o) {
-        return null;
-    }
-
-    @Override
-    public Offer create(Offer offer) {
-        return null;
-    }
 
     @Override
     public List<Offer> getAll() {

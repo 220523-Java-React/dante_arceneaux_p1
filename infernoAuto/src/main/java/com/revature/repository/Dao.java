@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface Dao<T> {
 
-    Object createUser(Object o);
+    Object createObject(T t);
 
     T create(T t);
 

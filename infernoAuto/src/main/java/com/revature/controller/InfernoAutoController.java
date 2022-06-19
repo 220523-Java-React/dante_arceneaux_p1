@@ -37,6 +37,7 @@ public class InfernoAutoController extends Driver {
     };
 
     public Handler createCar = ctx -> {
+
         Car car = ctx.bodyAsClass(Car.class); // get the car from the client
         carDao.create(car); // create the car in the service
         ctx.status(201); // set the status code to 201

@@ -2,14 +2,14 @@ package com.revature.database;
 import java.sql.*;
 
 public class InsertValue  {
-    public static void createItem(int id, String firstName,
+    public void createItem(int id, String firstName,
                            String lastName , String username, String password) throws SQLException {
 
         Statement statement = null;
         Connection connection = Database.getConnection();
 
         try {
-            String query = "INSERT INTO userdata (firstname, lastname, username, password) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO users (first_name, last_name, username, password) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);

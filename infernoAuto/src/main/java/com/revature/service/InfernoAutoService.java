@@ -1,7 +1,6 @@
 package com.revature.service;
 
 import com.revature.model.Car;
-import com.revature.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

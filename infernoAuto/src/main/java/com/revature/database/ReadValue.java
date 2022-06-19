@@ -58,7 +58,7 @@ public class ReadValue  {
         try {
             Statement statement = null;
             Connection connection = Database.getConnection();
-            String query = "SELECT id FROM userdata";
+            String query = "SELECT id FROM users";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

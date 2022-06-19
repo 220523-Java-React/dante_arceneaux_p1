@@ -1,5 +1,7 @@
 package com.revature.model;
 
+import java.util.Objects;
+
 public class Car extends Vehicle {
 
     String make;
@@ -13,8 +15,7 @@ public class Car extends Vehicle {
     int id;
 
 
-
-    public Car(){
+    public Car() {
     }
 
     public Car(String make, String model, int year, int mileage, String color, double price,
@@ -29,75 +30,102 @@ public class Car extends Vehicle {
         this.id = id;
     }
 
-    public void getMake(String make) {
-        this.make = make;
+    public String getMake() {
+        return make;
     }
 
-    public void setMake(String make) {
+    public Car setMake(String make) {
         this.make = make;
+        return this;
     }
 
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public Car setModel(String model) {
         this.model = model;
+        return this;
     }
 
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public Car setYear(int year) {
         this.year = year;
+        return this;
     }
 
     public int getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public Car setMileage(int mileage) {
         this.mileage = mileage;
+        return this;
     }
 
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public Car setColor(String color) {
         this.color = color;
+        return this;
     }
 
-    public double getPrice(byte price) {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public Car setPrice(double price) {
         this.price = price;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Car setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public Car setId(int id) {
         this.id = id;
+        return this;
     }
 
+    @Override
+    public String toString() {
+        return "Car{" +
+                "make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", mileage=" + mileage +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", id=" + id +
+                '}';
+    }
 
-@Override
-    void drive() {
-        System.out.println("Driving");
-    };
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return year == car.year && mileage == car.mileage && Double.compare(car.price, price) == 0 && id == car.id && Objects.equals(make, car.make) && Objects.equals(model, car.model) && Objects.equals(color, car.color) && Objects.equals(description, car.description);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(make, model, year, mileage, color, price, description, id);
+    }
 }

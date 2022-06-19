@@ -1,5 +1,6 @@
 package com.revature.repository;
 
+import com.revature.model.Employee;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
 
@@ -10,28 +11,33 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository implements Dao<User> {
+public class EmployeeRepository implements Dao<Employee> {
 
-    @Override
+
     public Object createObject(User user) {
         return null;
     }
 
     @Override
-    public User create(User user) {
+    public Object createObject(Employee employee) {
+        return null;
+    }
+
+    @Override
+    public Employee create(Employee employee) {
         // we are receiving a full user object
         // we need a query to insert that record
         //                                                                                1,2,3,4
-        String sql = "insert into users(first_name, last_name, username, password) values(?,?,?,?)";
+        String sql = "insert into employees(first_name, last_name, username, password) values(?,?,?,?)";
 
         try {
 
             Connection connection = ConnectionUtility.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, user.getFirstName());
-            stmt.setString(2, user.getLastName());
-            stmt.setString(3, user.getUsername());
-            stmt.setString(4, user.getPassword());
+            stmt.setString(1, employee.getFirstName());
+            stmt.setString(2, employee.getLastName());
+            stmt.setString(3, employee.getUsername());
+            stmt.setString(4, employee.getPassword());
 
 
             int success = stmt.executeUpdate();
@@ -43,12 +49,17 @@ public class UserRepository implements Dao<User> {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<Employee> getAll() {
+        return null;
+    }
+
+
+    public List<Employee> getAllEmployees() {
         // Empty lists of users, will add any new users from the result set
-        List<User> users = new ArrayList<>();
+        List<Employee> employees = new ArrayList<>();
 
 
-        String sql = "select * from users";
+        String sql = "select * from employees";
         try {
             Connection connection = ConnectionUtility.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -57,13 +68,13 @@ public class UserRepository implements Dao<User> {
 
             while (results.next()) {
                 // go through each result, build a User object for that data, add that user object the users list
-                User user = new User();
-                user.setFirstName(results.getString("first_name"));
-                user.setLastName(results.getString("last_name"));
-                user.setUsername(results.getString("username"));
-                user.setPassword(results.getString("password"));
+                Employee employee = new Employee();
+                employee.setFirstName(results.getString("first_name"));
+                employee.setLastName(results.getString("last_name"));
+                employee.setUsername(results.getString("username"));
+                employee.setPassword(results.getString("password"));
 
-                users.add(user);
+                employees.add(employee);
             }
 
 
@@ -71,17 +82,17 @@ public class UserRepository implements Dao<User> {
             e.printStackTrace();
         }
 
-        return users;
+        return employees;
     }
 
     @Override
-    public User getById(int id) {
+    public Employee getById(int id) {
 
         return null;
     }
 
     @Override
-    public User update(User user) {
+    public Employee update(Employee employees) {
         return null;
     }
 
@@ -90,7 +101,7 @@ public class UserRepository implements Dao<User> {
         return false;
     }
 
-    public Object createUser(Object o) {
+    public Object createEmployee(Object o) {
 
         return null;
     }
