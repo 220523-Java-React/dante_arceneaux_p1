@@ -1,37 +1,28 @@
 package com.revature.model;
 
-import lombok.ToString;
 
-
+import java.sql.Timestamp;
 
 public class Offer {
 
     private int id;
     private String offerType;
-    private String offerDate;
+
     private int offerPrice;
     private String offerStatus;
 
-    Offer (){
+    private Timestamp completedAt;
+
+    public Offer (){
     }
 
-    public Offer(int offerId, String offerType,
-                 String offerDate, int offerPrice,
-                 String offerStatus) {
-        this.id = id;
+    public Offer(String offerType, int offerPrice, String offerStatus)
+    {
         this.offerType = offerType;
-        this.offerDate = offerDate;
         this.offerPrice = offerPrice;
         this.offerStatus = offerStatus;
     }
 
-    public int getOfferId() {
-        return id;
-    }
-
-    public void setOfferId(int offerId) {
-        this.id = offerId;
-    }
 
     public String getOfferType() {
         return offerType;
@@ -41,13 +32,6 @@ public class Offer {
         this.offerType = offerType;
     }
 
-    public String getOfferDate() {
-        return offerDate;
-    }
-
-    public void setOfferDate(String offerDate) {
-        this.offerDate = offerDate;
-    }
 
     public int getOfferPrice() {
         return offerPrice;
@@ -69,14 +53,15 @@ public class Offer {
 
     @Override
     public String toString() {
-        return "Offer [offer=" + id + ", offerType=" + offerType + ", offerDate=" + offerDate + ", offerPrice=" + offerPrice + ", offerStatus=" + offerStatus + "]";
+        return "Offer [offerType=" + offerType + ", offerPrice=" + offerPrice + ", offerStatus="
+                + offerStatus + "]";
     }
 
     public boolean add(Offer offer) {
         return true;
     }
 
-    public int getId() {
-        return id;
+    public Timestamp getCompletedAt() {
+        return completedAt;
     }
 }

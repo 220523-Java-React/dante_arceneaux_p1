@@ -42,13 +42,6 @@ public class Driver {
                 offerController.createOffer);
         app.get("/offers/all",
                 offerController.getAllOffers);
-        app.get("/offers/{id}",
-                offerController.getOfferById);
-        app.delete("/offers/{id}",
-                offerController.deleteOfferById);
-        app.put("/offers", offerController.updateOffer);
-        app.post("/offers/{id}/accept",
-                offerController.acceptOffer);
 
 
 
