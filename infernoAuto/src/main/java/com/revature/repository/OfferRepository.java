@@ -35,9 +35,8 @@ public class OfferRepository implements Dao<Offer> {
 
 
     public Offer createOffer(Offer offer) {
-        // we are receiving a full user object
-        // we need a query to insert that record
-        //                                                                                1,2,3,4
+
+
         String sql = "insert into offerdata(offer_type, offer_price, offer_status) values(?,?,?)";
 
         try {
