@@ -1,19 +1,19 @@
 package com.revature.database;
+import com.revature.model.User;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 
-public class ReadValue  {
+public class ReadValue {
     public static void readValue() throws SQLException {
         Statement statement = null;
         Connection connection = DriverManager.getConnection(
                 "jdbc:postgresql://localhost:5432" +
                         "/postgres", "postgres",
                 "Ch3ss75!9");
-   try
-
-        {
-            String query = "SELECT * FROM userdata";
+        try {
+            String query = "SELECT * FROM users";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -23,8 +23,7 @@ public class ReadValue  {
                 System.out.println(resultSet.getString("username"));
                 System.out.println(resultSet.getString("password"));
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -36,7 +35,7 @@ public class ReadValue  {
                         "/postgres", "postgres",
                 "Ch3ss75!9");
         try {
-            String query = "SELECT * FROM userdata WHERE " +
+            String query = "SELECT * FROM users WHERE " +
                     "id " +
                     "= ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -68,5 +67,63 @@ public class ReadValue  {
             e.printStackTrace();
         }
         return ids;
+    }
+
+    public ArrayList<String> getAllPasswords() {
+        ArrayList<String> passwords = new ArrayList<>();
+        try {
+            Statement statement = null;
+            Connection connection = Database.getConnection();
+            String query = "SELECT password FROM users";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                passwords.add(resultSet.getString("password"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return passwords;
+    }
+
+    public ArrayList<String> getAllUsernames() {
+        ArrayList<String> usernames = new ArrayList<>();
+        try {
+            Statement statement = null;
+            Connection connection = Database.getConnection();
+            String query = "SELECT username FROM users";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                usernames.add(resultSet.getString("username"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usernames;
+    }
+
+    public ArrayList<String> getAllCars() throws SQLException {
+        Statement statement = null;
+        Connection connection = DriverManager.getConnection(
+                "jdbc:postgresql://localhost:5432" +
+                        "/postgres", "postgres",
+                "Ch3ss75!9");
+        try {
+            String query = "SELECT id, make, model, year,  price  FROM cars";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt("id"));
+                System.out.println(resultSet.getString("make"));
+                System.out.println(resultSet.getString("model"));
+                System.out.println(resultSet.getInt("year"));
+                System.out.println(resultSet.getInt("price"));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

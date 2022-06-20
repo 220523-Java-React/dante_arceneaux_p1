@@ -132,4 +132,27 @@ public class OfferRepository implements Dao<Offer> {
         return null;
 
     }
+
+    public Offer updateOfferStatus(Offer offer) {
+        // we are receiving a full user object
+        // we need a query to insert that record
+
+        List<Offer> offers = getAllOffers();
+        //                                                                                1,2,3,4
+        String sql = "update offerdata set offer_status = 'closed' where offer_status = 'open' ";
+
+        try {
+
+            Connection connection = ConnectionUtility.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet results = stmt.executeQuery();
+
+            stmt.setString(-1, offer.getOfferStatus());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
 }

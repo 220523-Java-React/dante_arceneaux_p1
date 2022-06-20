@@ -26,7 +26,7 @@ User user = new User();
 
 
 
-        String sql = "INSERT INTO cars (make, model, year, color, price, description) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cars (make, model, year, price) VALUES (?, ?, ?, ?)";
 
             try {
                 Connection conn = ConnectionUtility.getConnection();
@@ -34,9 +34,7 @@ User user = new User();
                 ps.setString(1, car.getMake());
                 ps.setString(2, car.getModel());
                 ps.setInt(3, car.getYear());
-                ps.setString(4, car.getColor());
-                ps.setDouble(5, car.getPrice());
-                ps.setString(6, car.getDescription());
+                ps.setDouble(4, car.getPrice());
                 ps.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -60,9 +58,7 @@ return null;
                         .setMake(results.getString("make"))
                         .setModel(results.getString("model"))
                         .setYear(results.getInt("year"))
-                        .setColor(results.getString("color"))
-                        .setPrice(results.getDouble("price"))
-                        .setDescription(results.getString("description")));
+                        .setPrice(results.getDouble("price")));
 
             }
         } catch (SQLException e) {

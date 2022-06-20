@@ -1,8 +1,6 @@
 package com.revature.model;
 
-import io.javalin.core.security.RouteRole;
-
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {

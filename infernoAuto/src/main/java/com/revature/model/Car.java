@@ -7,11 +7,8 @@ public class Car extends Vehicle {
     String make;
     String model;
     int year;
-    int mileage;
     String color;
     double price;
-    String description;
-
     int id;
 
 
@@ -23,10 +20,8 @@ public class Car extends Vehicle {
         this.make = make;
         this.model = model;
         this.year = year;
-        this.mileage = mileage;
         this.color = color;
         this.price = price;
-        this.description = description;
         this.id = id;
     }
 
@@ -57,14 +52,6 @@ public class Car extends Vehicle {
         return this;
     }
 
-    public int getMileage() {
-        return mileage;
-    }
-
-    public Car setMileage(int mileage) {
-        this.mileage = mileage;
-        return this;
-    }
 
     public String getColor() {
         return color;
@@ -84,15 +71,6 @@ public class Car extends Vehicle {
         return this;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public Car setDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
     public int getId() {
         return id;
     }
@@ -108,10 +86,8 @@ public class Car extends Vehicle {
                 "make='" + make + '\'' +
                 ", model='" + model + '\'' +
                 ", year=" + year +
-                ", mileage=" + mileage +
                 ", color='" + color + '\'' +
                 ", price=" + price +
-                ", description='" + description + '\'' +
                 ", id=" + id +
                 '}';
     }
@@ -119,13 +95,31 @@ public class Car extends Vehicle {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Car)) return false;
+
         Car car = (Car) o;
-        return year == car.year && mileage == car.mileage && Double.compare(car.price, price) == 0 && id == car.id && Objects.equals(make, car.make) && Objects.equals(model, car.model) && Objects.equals(color, car.color) && Objects.equals(description, car.description);
+
+        if (year != car.year) return false;
+        if (Double.compare(car.price, price) != 0) return false;
+        if (id != car.id) return false;
+        if (make != null ? !make.equals(car.make) : car.make != null) return false;
+        if (model != null ? !model.equals(car.model) : car.model != null) return false;
+        return color != null ? color.equals(car.color) : car.color == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(make, model, year, mileage, color, price, description, id);
+        int result;
+        long temp;
+        result = make != null ? make.hashCode() : 0;
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + year;
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + id;
+        return result;
     }
 }
+
+

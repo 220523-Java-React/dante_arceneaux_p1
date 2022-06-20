@@ -64,4 +64,8 @@ public class Offer {
     public Timestamp getCompletedAt() {
         return completedAt;
     }
+
+    public int getId() {
+        return id;
+    }
 }
