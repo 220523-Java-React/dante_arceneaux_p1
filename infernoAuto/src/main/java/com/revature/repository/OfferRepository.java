@@ -1,6 +1,7 @@
 package com.revature.repository;
 
 import com.revature.model.Offer;
+import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
 
@@ -66,6 +67,29 @@ public class OfferRepository implements Dao<Offer> {
         return null;
     }
 
+    public Offer getOfferById(int id){
+
+        String sql = "select * from offerdata where id = ?";
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                // build return the user and return it
+                return new Offer()
+                        .setId(rs.getInt("id"))
+                        .setOfferType(rs.getString("offer_type"))
+                        .setOfferPrice(rs.getInt("offer_price"))
+                        .setOfferStatus(rs.getString("offer_status"));
+
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public List<Offer> getAllOffers() {
         // Empty lists of users, will add any new users from the result set
@@ -82,6 +106,7 @@ public class OfferRepository implements Dao<Offer> {
             while (results.next()) {
                 // go through each result, build a User object for that data, add that user object the users list
                 Offer offer = new Offer();
+                offer.setId(results.getInt("id"));
                 offer.setOfferType(results.getString("offer_type"));
                 offer.setOfferPrice(results.getInt("offer_price"));
                 offer.setOfferStatus(results.getString("offer_status"));

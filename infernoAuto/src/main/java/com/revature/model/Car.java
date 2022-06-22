@@ -15,15 +15,17 @@ public class Car extends Vehicle {
     public Car() {
     }
 
-    public Car(String make, String model, int year, int mileage, String color, double price,
-               String description, int id) {
+    public Car(int id, String make, String model, int year, double price) {
         this.make = make;
         this.model = model;
         this.year = year;
-        this.color = color;
         this.price = price;
         this.id = id;
+
+
     }
+
+
 
     public String getMake() {
         return make;
@@ -53,14 +55,6 @@ public class Car extends Vehicle {
     }
 
 
-    public String getColor() {
-        return color;
-    }
-
-    public Car setColor(String color) {
-        this.color = color;
-        return this;
-    }
 
     public double getPrice() {
         return price;

@@ -1,6 +1,5 @@
 package com.revature.model;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {
@@ -31,50 +30,55 @@ public class User {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public User setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public User setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
+        return this;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public User setId(int id) {
         this.id = id;
+        return this;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public User setRole(Role role) {
+        this.role = role;
+        return this;
+    }
 
     //hashcode
     public int hashCode() {

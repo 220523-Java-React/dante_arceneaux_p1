@@ -12,6 +12,7 @@ public class OfferService {
     List<Offer> offers;
 
 
+
     public OfferService() {
         offers = new ArrayList<>();
     }
@@ -26,15 +27,6 @@ public class OfferService {
 
     public Offer acceptOffer(Offer offer) {
         return offer;
-    }
-
-    public Offer getOfferById(int id) {
-        for (int i = 0; i < offers.size(); i++) {
-            if (offers.get(i).getId() == id) {
-                return offers.get(i);
-            }
-        }
-        return null;
     }
 
     public boolean deleteOfferById(int id) {

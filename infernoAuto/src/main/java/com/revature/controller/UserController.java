@@ -25,5 +25,11 @@ public class UserController extends Driver {
         ctx.status(201); // set the status code to 201
     };
 
+    public Handler getUserById = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        ctx.json(userService.getUserById(id));
+        ctx.status(201);
+    };
+
 
 }

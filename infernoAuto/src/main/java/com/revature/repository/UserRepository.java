@@ -83,11 +83,58 @@ public class UserRepository implements Dao<User> {
         return users;
     }
 
-    @Override
-    public User getById(int id) {
 
+    @Override
+    public User getById(int id){
+
+        String sql = "select * from users where id = ?";
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                // build return the user and return it
+                return new User()
+                        .setId(rs.getInt("id"))
+                        .setFirstName(rs.getString("first_name"))
+                        .setLastName(rs.getString("last_name"))
+                        .setUsername(rs.getString("username"))
+                        .setPassword(rs.getString("password")) ;
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
+
+    //getByUserame
+
+    public User getByUsername(String username){
+        String sql = "select * from users where username = ?";
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, username);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                // build return the user and return it
+                return new User()
+                        .setId(rs.getInt("id"))
+                        .setFirstName(rs.getString("first_name"))
+                        .setLastName(rs.getString("last_name"))
+                        .setUsername(rs.getString("username"))
+                        .setPassword(rs.getString("password"))
+                        .setRole(Role.values()[rs.getInt("role_id")]);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
 
     @Override
     public User update(User user) {

@@ -58,6 +58,7 @@ return null;
 
             while(results.next()){
                 cars.add(new Car()
+                        .setId(results.getInt("id"))
                         .setMake(results.getString("make"))
                         .setModel(results.getString("model"))
                         .setYear(results.getInt("year"))
@@ -75,6 +76,31 @@ return null;
     public Car getById(int id) {
         return null;
     }
+
+
+    public Car getCarById(int id){
+
+        String sql = "select * from cars where id = ?";
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                // build return the user and return it
+                return new Car()
+                        .setId(rs.getInt("id"))
+                        .setMake(rs.getString("make"))
+                        .setModel(rs.getString("model"))
+                        .setYear(Integer.parseInt(rs.getString("year")))
+                        .setPrice(Double.parseDouble(rs.getString("price")));
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public Car update(Car car) {

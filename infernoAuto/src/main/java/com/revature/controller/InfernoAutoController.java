@@ -31,14 +31,12 @@ public class InfernoAutoController extends Driver {
     };
 
     public Handler getCarById = ctx -> {
-        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url
-        Car car = carDao.getById(id); // get the car from
-        // the service
-        ctx.json(car); // send the car to the client
+        int id = Integer.parseInt(ctx.pathParam("id"));// get the id from the client
+        Car car = carDao.getCarById(id);// get the car from the service
+        ctx.json(car);// send the car to the client
     };
 
     public Handler createCar = ctx -> {
-
         Car car = ctx.bodyAsClass(Car.class); // get the car from the client
         carDao.create(car); // create the car in the service
         ctx.status(201); // set the status code to 201

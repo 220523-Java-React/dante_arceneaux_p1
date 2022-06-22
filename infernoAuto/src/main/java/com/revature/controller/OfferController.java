@@ -33,5 +33,11 @@ public class OfferController {
         ctx.status(201); // set the status code to 201
     };
 
+    public Handler getOfferById = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the client
+        Offer offer = offerRepository.getOfferById(id); // get the car from the service
+        ctx.json(offer); // send the car to the client
+    };
+
 
 }

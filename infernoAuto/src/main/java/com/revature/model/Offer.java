@@ -16,37 +16,49 @@ public class Offer {
     public Offer (){
     }
 
-    public Offer(String offerType, int offerPrice, String offerStatus)
+    public Offer(int id, String offerType, int offerPrice, String offerStatus)
     {
+        this.id = id;
         this.offerType = offerType;
         this.offerPrice = offerPrice;
         this.offerStatus = offerStatus;
     }
 
+    public Offer setId(int id) {
+        this.id = id;
+        return this;
+    }
 
     public String getOfferType() {
         return offerType;
     }
 
-    public void setOfferType(String offerType) {
+    public Offer setOfferType(String offerType) {
         this.offerType = offerType;
+        return this;
     }
-
 
     public int getOfferPrice() {
         return offerPrice;
     }
 
-    public void setOfferPrice(int offerPrice) {
+    public Offer setOfferPrice(int offerPrice) {
         this.offerPrice = offerPrice;
+        return this;
     }
 
     public String getOfferStatus() {
         return offerStatus;
     }
 
-    public void setOfferStatus(String offerStatus) {
+    public Offer setOfferStatus(String offerStatus) {
         this.offerStatus = offerStatus;
+        return this;
+    }
+
+    public Offer setCompletedAt(Timestamp completedAt) {
+        this.completedAt = completedAt;
+        return this;
     }
 
     //tostring
