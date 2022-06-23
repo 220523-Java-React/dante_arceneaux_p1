@@ -24,6 +24,7 @@ public class Offer {
         this.offerStatus = offerStatus;
     }
 
+
     public Offer setId(int id) {
         this.id = id;
         return this;
