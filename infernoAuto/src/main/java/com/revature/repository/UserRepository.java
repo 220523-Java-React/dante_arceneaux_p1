@@ -1,9 +1,12 @@
 package com.revature.repository;
 
+import com.revature.Driver;
 import com.revature.model.Offer;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserRepository implements Dao<User> {
+public class UserRepository implements Dao<User> { static Logger logger = LoggerFactory.getLogger(Driver.class);
 
 
     @Override
@@ -46,6 +49,7 @@ public class UserRepository implements Dao<User> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error creating user");
         }
 
         return null;
@@ -81,6 +85,7 @@ public class UserRepository implements Dao<User> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error getting all users");
         }
 
         return users;
@@ -107,6 +112,7 @@ public class UserRepository implements Dao<User> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error getting user by id");
         }
         return null;
     }
@@ -151,6 +157,7 @@ public class UserRepository implements Dao<User> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error getting user by username");
         }
         return null;
     }
@@ -181,7 +188,7 @@ public class UserRepository implements Dao<User> {
 
         } catch (SQLException e) {
             e.printStackTrace();
-
+            logger.warn("Error getting user by username");
 
 
         }
@@ -213,6 +220,7 @@ public class UserRepository implements Dao<User> {
             //must be an employee
             e.printStackTrace();
             System.out.println("You are not an employee");
+            logger.warn("Error updating user by id");
         }
         return null;
     };
@@ -230,6 +238,7 @@ public class UserRepository implements Dao<User> {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to delete user");
+            logger.warn("Error deleting user by id");
         }
         return null;
     }
