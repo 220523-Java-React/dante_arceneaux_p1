@@ -39,10 +39,9 @@ public class OfferService {
         return false;
     }
 
-    public boolean updateOffer(Offer offer) {
+    public boolean updateOfferById(int id) {
         for (int i = 0; i < offers.size(); i++) {
-            if (offers.get(i).getId() == offer.getId()) {
-                offers.set(i, offer);
+            if (offers.get(i).getId() == id) {
                 return true;
             }
         }
@@ -86,6 +85,9 @@ public class OfferService {
         return null;
     }
 
+    public Offer updateOffer(Offer offer) {
+        return offer;
+    }
 
 
 

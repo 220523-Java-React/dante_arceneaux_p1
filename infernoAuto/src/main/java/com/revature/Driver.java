@@ -59,8 +59,12 @@ public class Driver {
         });
         app.post("/offers", offerController.createOffer);
         app.get("/offers/all", offerController.getAllOffers);
-
         app.get("/offers/{id}", offerController.getOfferById);
+        app.put("/offers/update/", offerController.updateByOffer);
+        app.delete("/offers/delete/{id}", offerController.deleteOfferById);
+
+
+
         app.get("/users/{id}", userController.getUserById);
         app.get("/cars/{id}", infernoAutoController.getCarById);
 
@@ -69,7 +73,6 @@ public class Driver {
         app.post("/register", userController.createUser);
 
         app.before("/users*", AuthController.withAuth);
-        app.before("/users*", AuthController.test);
         app.before("/cars*", AuthController.withAuth);
 
        Login login = new Login();

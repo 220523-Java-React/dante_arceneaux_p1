@@ -31,7 +31,4 @@ public class AuthController {
         }
     };
 
-    public static Handler test = context -> {
-        System.out.println("Did this work???");
-    };
 }

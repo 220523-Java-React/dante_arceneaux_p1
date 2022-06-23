@@ -1,8 +1,6 @@
 package com.revature.repository;
 
 import com.revature.model.Offer;
-import com.revature.model.Role;
-import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
 
 import java.sql.Connection;
@@ -67,15 +65,15 @@ public class OfferRepository implements Dao<Offer> {
         return null;
     }
 
-    public Offer getOfferById(int id){
+    public Offer getOfferById(int id) {
 
         String sql = "select * from offerdata where id = ?";
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
 
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 // build return the user and return it
                 return new Offer()
                         .setId(rs.getInt("id"))
@@ -84,7 +82,7 @@ public class OfferRepository implements Dao<Offer> {
                         .setOfferStatus(rs.getString("offer_status"));
 
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -133,50 +131,36 @@ public class OfferRepository implements Dao<Offer> {
         return false;
     }
 
-    public Offer updateCompletedAt(Offer offer) {
-        // we are receiving a full user object
-        // we need a query to insert that record
-
-        List<Offer> offers = getAllOffers();
-        //                                                                                1,2,3,4
-        String sql = "update offerdata set completed_at = NOW() where offer_status = 'closed' ";
-
+    public Offer updateByOffer(Offer offer) {
+        String sql = "update offerdata set offer_type = ?, offer_price = ?, offer_status = ? where id = ?";
         try {
-
             Connection connection = ConnectionUtility.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
-            ResultSet results = stmt.executeQuery();
+            stmt.setString(1, offer.getOfferType());
+            stmt.setInt(2, offer.getOfferPrice());
+            stmt.setString(3, offer.getOfferStatus());
+            stmt.setInt(4, offer.getId());
 
-            stmt.setTimestamp(-1, offer.getCompletedAt());
+            int success = stmt.executeUpdate();
 
-            offers.add(offer);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
-
     }
 
-    public Offer updateOfferStatus(Offer offer) {
-        // we are receiving a full user object
-        // we need a query to insert that record
-
-        List<Offer> offers = getAllOffers();
-        //                                                                                1,2,3,4
-        String sql = "update offerdata set offer_status = 'closed' where offer_status = 'open' ";
-
+    public Offer deleteOfferById(int id) {
+        String sql = "delete from offerdata where id = ?";
         try {
-
             Connection connection = ConnectionUtility.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
-            ResultSet results = stmt.executeQuery();
+            stmt.setInt(1, id);
 
-            stmt.setString(-1, offer.getOfferStatus());
+            int success = stmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
-
     }
-
 }

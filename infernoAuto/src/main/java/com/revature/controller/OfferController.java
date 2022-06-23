@@ -13,7 +13,6 @@ public class OfferController {
     OfferRepository offerRepository = new OfferRepository();
 
 
-
     public Handler getAllOffers = ctx -> {
         List<Offer> offers;// create a new list of cars
         offers = offerRepository.getAllOffers();// get all cars
@@ -21,7 +20,6 @@ public class OfferController {
         ctx.json(offers);// send the list of cars to the
         // client
     };
-
 
 
     public Handler createOffer = ctx -> {
@@ -39,5 +37,15 @@ public class OfferController {
         ctx.json(offer); // send the car to the client
     };
 
+    public Handler updateByOffer = ctx -> {
+        Offer offer = ctx.bodyAsClass(Offer.class); // get the car from the client
+        offerRepository.updateByOffer(offer); // update the car in the service
+        ctx.status(204); // set the status code to 204
+    };
 
+    public Handler deleteOfferById = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url
+        offerRepository.deleteOfferById(id);
+        ctx.status(204); // set the status code to 204
+    };
 }
