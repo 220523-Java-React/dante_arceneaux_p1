@@ -65,6 +65,9 @@ public class Driver {
                 get("/get/{id}", offerController.getOfferById);
                 put("/update/{id}", offerController.updateByOfferId);
                 delete("/delete/{id}", offerController.deleteOfferById);
+                get("/get/open/open", offerController.getByOpenOffer);
+                post("/accept/{id}", offerController.acceptOffer);
+
 
             });
         });

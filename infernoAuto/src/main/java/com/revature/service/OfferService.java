@@ -12,7 +12,6 @@ public class OfferService {
     List<Offer> offers;
 
 
-
     public OfferService() {
         offers = new ArrayList<>();
     }
@@ -77,7 +76,7 @@ public class OfferService {
         return null;
     }
 
-   //updateOfferById
+    //updateOfferById
 
     public Offer updateOfferById(int id, Offer offer) {
         for (int i = 0; i < offers.size(); i++) {
@@ -89,7 +88,23 @@ public class OfferService {
         return null;
     }
 
+    public List<Offer> getOffersByOpen() {
+        List<Offer> openOffers = new ArrayList<>();
+        for (int i = 0; i < offers.size(); i++) {
+            if (offers.get(i).getOfferStatus().equals("open")) {
+                openOffers.add(offers.get(i));
+            }
+        }
+        return openOffers;
+    }
 
-
-
+   public List<Offer> acceptOrRejectOffer(Offer offer) {
+         for (int i = 0; i < offers.size(); i++) {
+              if (offers.get(i).getId() == offer.getId()) {
+                offers.set(i, offer);
+                return offers;
+              }
+         }
+         return null;
+   }
 }

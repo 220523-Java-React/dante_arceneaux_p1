@@ -59,4 +59,12 @@ public class UserController extends Driver {
         ctx.status(201);
     };
 
+//    public Handler getRole = ctx -> {
+//        String right = ctx.queryParam("left");
+//        int id = Integer.parseInt(ctx.pathParam("id"));
+//        ctx.json(userRepository.getRole(id));
+//        ctx.status(201);
+//    };
+
+
     }

@@ -8,10 +8,7 @@ import com.revature.util.ConnectionUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,30 +27,35 @@ public class UserRepository implements Dao<User> { static Logger logger = Logger
     public User create(User user) {
         // we are receiving a full user object
         // we need a query to insert that record
-        //                                                                                1,2,3,4
-        String sql = "insert into users(first_name, last_name, username, password, role) values(?,?,?,?,?)";
+        //                                                                                1,2,3,4,5
+        String sql = "insert into users(first_name, last_name, username, password, role_id) values(?,?,?,?,?)";
 
+        /*
+                This is a Try-With-Resources block
+                used when you have resources that have open channels that you need to eventually close
 
-        try {
-
-            Connection connection = ConnectionUtility.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(sql);
+                try with resource WILL automatically close anything that implements the AutoClosable interface
+         */
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getFirstName());
             stmt.setString(2, user.getLastName());
             stmt.setString(3, user.getUsername());
             stmt.setString(4, user.getPassword());
-            stmt.setString(5, String.valueOf(user.getRole()));
-
+            stmt.setInt(5, user.getRole().ordinal());
 
             int success = stmt.executeUpdate();
-
+            ResultSet keys = stmt.getGeneratedKeys();
+            if(keys.next()) {
+                int id = keys.getInt(1);
+                return user.setId(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            logger.warn("Error creating user");
         }
-
         return null;
     }
+
 
     @Override
     public List<User> getAll() {
@@ -197,7 +199,7 @@ public class UserRepository implements Dao<User> { static Logger logger = Logger
     }
     public User updateUserById(int id, User user) {
 
-        String sql = "update users set first_name = ?, last_name = ?, username = ?, password = ?, role = ? where id = ?";
+        String sql = "update users set first_name = ?, last_name = ?, username = ?, password = ?, role_id = ? where id = ?";
         try {
 
             Connection connection = ConnectionUtility.getConnection();
@@ -242,6 +244,8 @@ public class UserRepository implements Dao<User> { static Logger logger = Logger
         }
         return null;
     }
+
+
 
 
 }

@@ -1,10 +1,12 @@
 package com.revature.repository;
 
-import com.revature.model.Employee;
+import com.revature.Driver;
 import com.revature.model.Offer;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ import java.util.List;
 
 public class OfferRepository implements Dao<Offer> {
 
+    static Logger logger = LoggerFactory.getLogger(Driver.class);
     private List<Offer> offers;
 
 
@@ -55,6 +58,7 @@ public class OfferRepository implements Dao<Offer> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error creating offer");
         }
         return null;
     }
@@ -88,6 +92,7 @@ public class OfferRepository implements Dao<Offer> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error getting offer");
         }
         return null;
     }
@@ -119,6 +124,7 @@ public class OfferRepository implements Dao<Offer> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error getting all offers");
         }
 
         return offers;
@@ -140,25 +146,27 @@ public class OfferRepository implements Dao<Offer> {
         String sql = "update offerdata set offer_type = ?, offer_price = ?, offer_status = ? where id = ?";
         try {
 
-                Connection connection = ConnectionUtility.getConnection();
-                PreparedStatement stmt = connection.prepareStatement(sql);
-                stmt.setString(1, offer.getOfferType());
-                stmt.setInt(2, offer.getOfferPrice());
-                stmt.setString(3, offer.getOfferStatus());
-                stmt.setInt(4, id);
+            Connection connection = ConnectionUtility.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, offer.getOfferType());
+            stmt.setInt(2, offer.getOfferPrice());
+            stmt.setString(3, offer.getOfferStatus());
+            stmt.setInt(4, id);
 
-                int success = stmt.executeUpdate();
-                if (success == 1) {
-                    return offer;
-                }
+            int success = stmt.executeUpdate();
+            if (success == 1) {
+                return offer;
+            }
 
         } catch (SQLException e) {
             //must be an employee
             e.printStackTrace();
             System.out.println("You are not an employee");
+            logger.warn("Error updating offer");
         }
         return null;
     }
+
     public Offer deleteOfferById(int id) {
         String sql = "delete from offerdata where id = ?";
         try {
@@ -170,7 +178,90 @@ public class OfferRepository implements Dao<Offer> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.error("Error deleting offer");
         }
         return null;
     }
+
+
+    //getByOpenOffer
+    public List<Offer> getByOpenOffer() {
+        String sql = "select * from offerdata where offer_status = 'open'";
+
+        try (Connection connection = ConnectionUtility.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                // go through each result, build a User object for that data, add that user object the users list
+                Offer offer = new Offer();
+                offer.setId(rs.getInt("id"));
+                offer.setOfferType(rs.getString("offer_type"));
+                offer.setOfferPrice(rs.getInt("offer_price"));
+                offer.setOfferStatus(rs.getString("offer_status"));
+
+                offers.add(offer);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.warn("Error getting all offers");
+        }
+
+        return offers;
+    };
+
+
+    //ACCEPT OR REJECT OFFER
+
+    public Offer acceptOffer(int id) {
+        String sql = "update offerdata set offer_status = 'closed' where id = ?";
+        try {
+
+            Connection connection = ConnectionUtility.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            int success = stmt.executeUpdate();
+            if (success == 1) {
+                return getOfferById(id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.warn("Error updating offer");
+        }
+        return null;
+    }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,10 +1,13 @@
 package com.revature.repository;
 
+import com.revature.Driver;
 import com.revature.model.Car;
 import com.revature.model.Offer;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +18,7 @@ import java.util.List;
 
 public class CarRepository implements Dao<Car> {
 
+    static Logger logger = LoggerFactory.getLogger(Driver.class);
 
     @Override
     public Object createObject(Car car) {
@@ -43,6 +47,8 @@ public class CarRepository implements Dao<Car> {
             System.out.println("Car added successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Car not added");
+
 
         }
         return null;
@@ -70,6 +76,8 @@ public class CarRepository implements Dao<Car> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error getting cars");
+
         }
 
         return cars;
@@ -100,6 +108,7 @@ public class CarRepository implements Dao<Car> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error getting car by id");
         }
         return null;
     }
@@ -125,6 +134,7 @@ public class CarRepository implements Dao<Car> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error getting cars by make");
         }
 
         return cars;
@@ -152,6 +162,7 @@ public class CarRepository implements Dao<Car> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Error deleting car by id");
         }
         return null;
     }
@@ -179,6 +190,7 @@ public class CarRepository implements Dao<Car> {
             //must be an employee
             e.printStackTrace();
             System.out.println("You are not an employee");
+            logger.warn("Error updating car by id");
         }
         return null;
     }
