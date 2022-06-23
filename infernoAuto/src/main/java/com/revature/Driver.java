@@ -43,30 +43,33 @@ public class Driver {
 
         app.routes(() -> {
             path("users", () -> {
-                get("/all", userController.getAllUsers);
-                post(userController.createUser);
+                get("/get/all", userController.getAllUsers);
+                get("/get/username/{username}", userController.getByUsername);
+                post("/add", userController.createUser);
+                get("/get/{id}", userController.getUserById);
+                delete("/delete/{id}", userController.deleteUserById);
+                put("update/{id}", userController.updateUserById);
+
             });
             path("cars", () -> {
-                get("/all",  infernoAutoController.getAllCars);
-                post("/employee", infernoAutoController.createCar);
-                delete("/employee/{id}", infernoAutoController.deleteCarById);
-                put(infernoAutoController.updateCar);
+                get("/get/all",  infernoAutoController.getAllCars);
+                get("/get/{id}", infernoAutoController.getCarById);
+                get("/get/make/{make}", infernoAutoController.getCarsByMake);
+                post("/add", infernoAutoController.createCar);
+                delete("/delete/{id}", infernoAutoController.deleteCarById);
+                put("/update/{id}", infernoAutoController.updateCarById);
             });
             path("offers", () -> {
-
+                post("/add", offerController.createOffer);
+                get("/get/all", offerController.getAllOffers);
+                get("/get/{id}", offerController.getOfferById);
+                put("/update/{id}", offerController.updateByOfferId);
+                delete("/delete/{id}", offerController.deleteOfferById);
 
             });
         });
-        app.post("/offers", offerController.createOffer);
-        app.get("/offers/all", offerController.getAllOffers);
-        app.get("/offers/{id}", offerController.getOfferById);
-        app.put("/offers/update/", offerController.updateByOffer);
-        app.delete("/offers/delete/{id}", offerController.deleteOfferById);
 
 
-
-        app.get("/users/{id}", userController.getUserById);
-        app.get("/cars/{id}", infernoAutoController.getCarById);
 
         app.post("/authenticate", AuthController.authenticate);
 
@@ -74,14 +77,12 @@ public class Driver {
 
         app.before("/users*", AuthController.withAuth);
         app.before("/cars*", AuthController.withAuth);
+        app.before("/offers*", AuthController.withAuth);
 
-       Login login = new Login();
-        Selection selection = new Selection();
-         login.login();
-        selection.startProgram();
-
-
-
-    }
+//       Login login = new Login();
+//        Selection selection = new Selection();
+//         login.login();
+//        selection.startProgram();
+        }
     }
 

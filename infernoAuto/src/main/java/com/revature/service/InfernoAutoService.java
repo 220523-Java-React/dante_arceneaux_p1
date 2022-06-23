@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import com.revature.model.Car;
+import com.revature.model.Offer;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.repository.CarRepository;
@@ -50,6 +51,16 @@ public class InfernoAutoService {
         return null;
     }
 
+    public Car getCarByMake(String make){
+        for(int i = 0; i < cars.size(); i++){
+            if(cars.get(i).getMake().equals(make)){
+                return cars.get(i);
+            }
+        }
+
+        return null;
+    }
+
     public boolean deleteCarById(int id){
         for(int i = 0; i < cars.size(); i++){
             if(cars.get(i).getId() == id){
@@ -62,15 +73,14 @@ public class InfernoAutoService {
     }
 
 
-    public boolean updateCar(Car car){
-        for(int i = 0; i < cars.size(); i++){
-            if(cars.get(i).getId() == car.getId()){
+    public Car updateCarById(int id, Car car) {
+        for (int i = 0; i < cars.size(); i++) {
+            if (cars.get(i).getId() == id) {
                 cars.set(i, car);
-                return true;
+                return car;
             }
         }
-
-        return false;
+        return null;
     }
 
 

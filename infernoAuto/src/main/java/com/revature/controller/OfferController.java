@@ -37,10 +37,11 @@ public class OfferController {
         ctx.json(offer); // send the car to the client
     };
 
-    public Handler updateByOffer = ctx -> {
+    public Handler updateByOfferId = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the client
         Offer offer = ctx.bodyAsClass(Offer.class); // get the car from the client
-        offerRepository.updateByOffer(offer); // update the car in the service
-        ctx.status(204); // set the status code to 204
+        offerRepository.updateOfferById(id, offer); // update the car in the service
+        ctx.status(201); // set the status code to 201
     };
 
     public Handler deleteOfferById = ctx -> {

@@ -1,7 +1,7 @@
 package com.revature.controller;
 
 import com.revature.Driver;
-import com.revature.model.Offer;
+import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.repository.UserRepository;
 import com.revature.service.UserService;
@@ -13,6 +13,7 @@ public class UserController extends Driver {
 
 
      UserService userService = new UserService();
+     UserRepository userDao = new UserRepository();
     public Handler getAllUsers = ctx -> {
         ctx.json(userService.getAllUsers());
         ctx.status(201);
@@ -31,5 +32,31 @@ public class UserController extends Driver {
         ctx.status(201);
     };
 
+    public Handler getByUsername = ctx -> {
+        String username = ctx.pathParam("username");
+        ctx.json(userDao.getByUsername(username));
+        ctx.status(201);
+    };
 
-}
+    UserRepository userRepository = new UserRepository();
+    public Handler deleteUserById = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        userRepository.deleteUserById(id);
+        ctx.status(204);
+    };
+
+
+    public Handler updateUser = ctx -> {
+        User user = ctx.bodyAsClass(User.class);
+        userRepository.update(user);
+        ctx.status(201);
+    };
+
+    public Handler updateUserById = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        User user = ctx.bodyAsClass(User.class);
+        userRepository.updateUserById(id, user);
+        ctx.status(201);
+    };
+
+    }

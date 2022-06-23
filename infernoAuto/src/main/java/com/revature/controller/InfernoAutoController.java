@@ -42,23 +42,23 @@ public class InfernoAutoController extends Driver {
         ctx.status(201); // set the status code to 201
     };
 
-    //create user
-
-
+    public Handler getCarsByMake = ctx -> {
+        String make = ctx.pathParam("make"); // get the make from the client
+        List<Car> cars = carDao.getCarsByMake(make); // get the cars from the service
+        ctx.json(cars); // send the cars to the client
+    };
 
     public Handler deleteCarById = ctx -> {
         int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url
-        carDao.deleteById(id); // delete the car from the
-        // service
+        carDao.deleteCarById(id); // delete the user from the service
         ctx.status(204); // set the status code to 204
     };
 
-    public Handler updateCar = ctx -> {
+    public Handler updateCarById = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id")); // get the id from the url
         Car car = ctx.bodyAsClass(Car.class); // get the car from the client
-        carDao.update(car); // update the car in the service
+        carDao.updateCarById(id, car); // update the car in the service
         ctx.status(204); // set the status code to 204
     };
-
-
 
 }

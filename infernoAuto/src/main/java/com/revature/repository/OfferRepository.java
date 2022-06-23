@@ -1,6 +1,9 @@
 package com.revature.repository;
 
+import com.revature.model.Employee;
 import com.revature.model.Offer;
+import com.revature.model.Role;
+import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
 
 import java.sql.Connection;
@@ -13,6 +16,7 @@ import java.util.List;
 public class OfferRepository implements Dao<Offer> {
 
     private List<Offer> offers;
+
 
     public OfferRepository() {
         offers = new ArrayList<>();
@@ -131,24 +135,30 @@ public class OfferRepository implements Dao<Offer> {
         return false;
     }
 
-    public Offer updateByOffer(Offer offer) {
+    public Offer updateOfferById(int id, Offer offer) {
+
         String sql = "update offerdata set offer_type = ?, offer_price = ?, offer_status = ? where id = ?";
         try {
-            Connection connection = ConnectionUtility.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, offer.getOfferType());
-            stmt.setInt(2, offer.getOfferPrice());
-            stmt.setString(3, offer.getOfferStatus());
-            stmt.setInt(4, offer.getId());
 
-            int success = stmt.executeUpdate();
+                Connection connection = ConnectionUtility.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setString(1, offer.getOfferType());
+                stmt.setInt(2, offer.getOfferPrice());
+                stmt.setString(3, offer.getOfferStatus());
+                stmt.setInt(4, id);
+
+                int success = stmt.executeUpdate();
+                if (success == 1) {
+                    return offer;
+                }
 
         } catch (SQLException e) {
+            //must be an employee
             e.printStackTrace();
+            System.out.println("You are not an employee");
         }
         return null;
     }
-
     public Offer deleteOfferById(int id) {
         String sql = "delete from offerdata where id = ?";
         try {
