@@ -59,4 +59,10 @@ public class UserController extends Driver {
         ctx.status(201);
     };
 
+    public Handler getUserByRole = ctx -> {
+        Role role = ctx.bodyAsClass(Role.class);
+        ctx.json(userRepository.getUserByRole(role));
+        ctx.status(201);
+    };
+
     }

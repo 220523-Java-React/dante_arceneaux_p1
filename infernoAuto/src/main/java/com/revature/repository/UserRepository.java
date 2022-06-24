@@ -28,7 +28,7 @@ public class UserRepository implements Dao<User> {
         // we are receiving a full user object
         // we need a query to insert that record
         //                                                                                1,2,3,4
-        String sql = "insert into users(first_name, last_name, username, password, role) values(?,?,?,?,?)";
+        String sql = "insert into users(first_name, last_name, username, password, role_id) values(?,?,?,?,?)";
 
 
         try {
@@ -39,7 +39,7 @@ public class UserRepository implements Dao<User> {
             stmt.setString(2, user.getLastName());
             stmt.setString(3, user.getUsername());
             stmt.setString(4, user.getPassword());
-            stmt.setString(5, String.valueOf(user.getRole()));
+            stmt.setInt(5, user.getRole().ordinal());
 
 
             int success = stmt.executeUpdate();
@@ -155,6 +155,35 @@ public class UserRepository implements Dao<User> {
         return null;
     }
 
+
+    public User getUserByRole(Role role) {
+        String sql = "select * from users where role_id = ?";
+        try {
+            Connection connection = ConnectionUtility.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, role.ordinal());
+
+            ResultSet results = stmt.executeQuery();
+
+            if (results.next()) {
+                // go through each result, build a User object for that data, add that user object the users list
+                User user = new User();
+
+                user.setId(results.getInt("id"));
+                user.setFirstName(results.getString("first_name"));
+                user.setLastName(results.getString("last_name"));
+                user.setUsername(results.getString("username"));
+                user.setPassword(results.getString("password"));
+
+                return user;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public User getByUsername(String username) {
 
         String sql = "select * from users where username = ?";
@@ -190,7 +219,7 @@ public class UserRepository implements Dao<User> {
     }
     public User updateUserById(int id, User user) {
 
-        String sql = "update users set first_name = ?, last_name = ?, username = ?, password = ?, role = ? where id = ?";
+        String sql = "update users set first_name = ?, last_name = ?, username = ?, password = ?, role_id = ? where id = ?";
         try {
 
             Connection connection = ConnectionUtility.getConnection();

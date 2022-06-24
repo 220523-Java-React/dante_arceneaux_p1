@@ -49,6 +49,7 @@ public class Driver {
                 get("/get/{id}", userController.getUserById);
                 delete("/delete/{id}", userController.deleteUserById);
                 put("update/{id}", userController.updateUserById);
+                get("/get/role/{role}", userController.getUserByRole);
 
             });
             path("cars", () -> {
@@ -77,8 +78,8 @@ public class Driver {
         app.post("/register", userController.createUser);
 
         app.before("/users*", AuthController.withAuth);
-        app.before("/cars*", AuthController.withAuth);
-        app.before("/offers*", AuthController.withAuth);
+        app.before("/offers/accept/{id}*", AuthController.withAuth);
+        app.before("/cars/delete/{id}*", AuthController.withAuth);
 
 //       Login login = new Login();
 //        Selection selection = new Selection();
