@@ -49,4 +49,10 @@ public class OfferController {
         offerRepository.deleteOfferById(id);
         ctx.status(204); // set the status code to 204
     };
+
+    public Handler acceptOffer = ctx -> {
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        offerRepository.acceptOffer(id);
+        ctx.status(201);
+    };
 }

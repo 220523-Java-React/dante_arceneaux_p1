@@ -173,4 +173,19 @@ public class OfferRepository implements Dao<Offer> {
         }
         return null;
     }
+
+    public Offer acceptOffer(int id) {
+        String sql = "update offerdata set offer_status = 'accepted' where id = ?";
+        try {
+            Connection connection = ConnectionUtility.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            int success = stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

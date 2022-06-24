@@ -65,6 +65,7 @@ public class Driver {
                 get("/get/{id}", offerController.getOfferById);
                 put("/update/{id}", offerController.updateByOfferId);
                 delete("/delete/{id}", offerController.deleteOfferById);
+                post("/accept/{id}", offerController.acceptOffer);
 
             });
         });
@@ -83,6 +84,7 @@ public class Driver {
 //        Selection selection = new Selection();
 //         login.login();
 //        selection.startProgram();
+
         }
     }
 
